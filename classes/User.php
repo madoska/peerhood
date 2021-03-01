@@ -3,9 +3,9 @@
 include_once(__DIR__ . "/Db.php");
 
 class User {
-        protected $id;
-        protected $email;
-        protected $password;
+        private $id;
+        private $email;
+        private $password;
 
         public function getId()
         {
@@ -67,7 +67,7 @@ class User {
                 return false;
             }
         }
-/*
+
         public function idFromSession($email) {
             //db conn
             $conn = Db::connect();
@@ -79,5 +79,5 @@ class User {
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
-        }*/
+        }
 }
