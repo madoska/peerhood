@@ -1,17 +1,22 @@
 <?php
-class Db
-{
-    public static function connect()
-    {
-        include_once(__DIR__ . "/../settings/settings.php");
 
-        $dsn = 'mysql:host=' . SETTINGS['db']['host'] . ';dbname=' . SETTINGS['db']['db'];
-        $pdo = new PDO(
-            $dsn,
-            SETTINGS['db']['user'],
-            SETTINGS['db']['password'],
-            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-        );
-        return $pdo;
-    }
+class Db {
+            
+    private static $conn;
+
+    public static function connect() {
+        include_once(__DIR__ . "/../settings/settings.php");
+    
+        if(self::$conn === null) {
+            try {
+                self::$conn = new PDO('mysql:host=' . SETTINGS['db']['host'] . ';port=' . SETTINGS['db']['port'] . ';dbname=' . SETTINGS['db']['dbname'], SETTINGS['db']['user'], SETTINGS['db']['password']);
+            } catch (PDOException $th) {
+                $error = $th->getMessage();
+            }
+            return self::$conn;
+        }else {
+            return self::$conn;
+        }
+        
+    }  
 }
