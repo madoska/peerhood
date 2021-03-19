@@ -1,0 +1,32 @@
+.form_title, .form_btn, .form_field, .form_register {
+    font-family: 'Oswald', sans-serif;
+}
+
+.form_field {
+    outline:none;
+}
+
+.logo {
+    width: 300px;
+}
+
+.form_title {
+    color: #083643;
+    font-weight: 400;
+}
+
+.form_register {
+    color: #083643;
+}
+
+.form_field, .form_btn, .form_register {
+    font-weight: 300;
+}
+
+.form_btn {
+    background-color: #FF7F50;
+}
+
+.form_register:hover {
+    color: #FF7F50;
+}
