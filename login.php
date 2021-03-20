@@ -50,8 +50,8 @@ include_once(__DIR__ . "/classes/User.php");
 				<h2 class="form_title text-center mb-14 text-2xl">Inloggen</h2>
 
 				<?php if(isset($error)) : ?>
-				<div class="form__error">
-					<p>
+				<div class="form_error text-center mb-5">
+					<p class="form_error">
 						<?php echo $error; ?>
 					</p>
 				</div>
