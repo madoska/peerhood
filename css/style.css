@@ -27,6 +27,14 @@
     background-color: #FF7F50;
 }
 
+.form_btn:hover {
+    opacity: .9;
+}
+
 .form_register:hover {
     color: #FF7F50;
+}
+
+.form_field::placeholder {
+    color: #083643;
 }
