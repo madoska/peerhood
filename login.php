@@ -42,12 +42,12 @@ include_once(__DIR__ . "/classes/User.php");
     <title>Login | peerhood</title>
 </head>
 <body class="bg-gray-200 h-screen mx-5 my-10">
-<div class="bg-white h-screen rounded-3xl w-96 ml-auto mr-auto">
+<div class="bg-white h-screen rounded-3xl w-80 md:w-96 ml-auto mr-auto">
 <img class="logo ml-auto mr-auto mb-2 pt-5" src="./images/logo-slogan.png">
 <div class="container">
 		<div class="">
 			<form action="" method="post">
-				<h2 class="form_title text-center mb-14 text-2xl">Inloggen</h2>
+				<h2 class="form_title text-center mb-14 text-xl md:text-2xl">Inloggen</h2>
 
 				<?php if(isset($error)) : ?>
 				<div class="form_error text-center mb-5">
@@ -58,15 +58,15 @@ include_once(__DIR__ . "/classes/User.php");
 				<?php endif; ?>
 
                 <div class="form_field">
-                    <input type="text" class="form_field bg-transparent border-b border-black w-72 mb-5 ml-auto mr-auto block" id="email" name="email" placeholder="Email">
+                    <input type="text" class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-5 ml-auto mr-auto block" id="email" name="email" placeholder="Email">
 				</div>
 
                 <div class="">
-                    <input type="password" class="form_field bg-transparent border-b border-black w-72 mb-5 ml-auto mr-auto block" id="password" name="password" placeholder="Wachtwoord">
+                    <input type="password" class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-5 ml-auto mr-auto block" id="password" name="password" placeholder="Wachtwoord">
                 </div>
 
 				<div class="form_button">
-					<input type="submit" value="Inloggen" class="form_btn w-72 h-12 shadow-md rounded-2xl text-white mb-2 ml-auto mr-auto block">	
+					<input type="submit" value="Inloggen" class="form_btn w-64 md:w-72 h-12 shadow-md rounded-2xl text-white mb-2 ml-auto mr-auto block">	
 				</div>
 			</form>
 			<div class="text-center text-sm">

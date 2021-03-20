@@ -7,7 +7,7 @@
 }
 
 .logo {
-    width: 300px;
+    width: 200px;
 }
 
 .form_title {
@@ -42,3 +42,11 @@
 .form_error {
     color: #FF7F50;
 }
+
+/* mediaqueries */
+
+@media screen and (min-width: 768px) {
+    .logo {
+        width: 300px;
+    }
+  }
