@@ -1,5 +1,7 @@
 <?php
 
+include_once(__DIR__ . "/classes/Course.php");
+
 if(isset($_POST['submit'])){
     if(!empty($_POST['coursename'])){
         if(!empty($_POST['profname'])){
@@ -9,6 +11,20 @@ if(isset($_POST['submit'])){
             echo $newhash;
             $code= substr($newhash, -6);
            var_dump($code);
+
+            $course = new Course();
+            $course->setAdmin_id("1");
+            $course->setCoursename($_POST['coursename']);
+            $course->setCode($code);
+            $result = $course->createCourse();
+                var_dump($result);
+                if ($result === true){
+                    
+                    header('Location: https://rammdesign.be/blog.php');
+                }
+                else if($status== false){
+                    echo 'publishing stalled';
+                }
         } else {echo "geen profnaam";}
     } else {echo "geen cursusnaam";}
 } 
