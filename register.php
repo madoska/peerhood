@@ -44,6 +44,11 @@ if (!empty($_POST['register'])) {
                             $user->setEmail($email);
                             $user->setPassword($password);
                             $register = $user->register($email, $password, $firstname, $lastname, $role);
+
+                            session_start();
+                            $userID = $user->fetchUserID($email);
+                            $_SESSION['user'] = $userID;
+                            header("Location: index.php");
                         } else {
                             echo "Password too short.";
                             $alert = 5;

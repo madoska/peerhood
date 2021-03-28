@@ -133,6 +133,16 @@ class User {
             return $result;
         }
 
+        public function fetchUserID($email)
+        {
+            $pdo = Db::connect();
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $result = $stmt->fetchColumn();
+            return $result;
+        }
+
         public function checkLogin($email, $password) {
             //db conn
             $conn = Db::connect();
