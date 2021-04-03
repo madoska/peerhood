@@ -74,7 +74,7 @@ class Course {
         //db conn
         $conn = Db::connect();
         //insert query
-        $statement = $conn->prepare("insert into courses (`admin_id`,`coursename`,`code`) VALUES(:admin_id , :coursename , :code)");
+        $statement = $conn->prepare("insert into courses (admin_id,coursename,code) VALUES(:admin_id , :coursename , :code)");
         $statement->bindParam(":admin_id", $admin_id);
         $statement->bindParam(":coursename", $coursename);
         $statement->bindParam(":code", $code);
