@@ -6,6 +6,7 @@ class Course
 {
 
     private $userID;
+    private $courseID;
     private $coursename;
     private $code;
 
@@ -17,6 +18,18 @@ class Course
     public function setUserID($userID)
     {
         $this->userID = $userID;
+
+        return $this;
+    }
+
+    public function getCourseID()
+    {
+        return $this->courseID;
+    }
+
+    public function setCourseID($courseID)
+    {
+        $this->courseID = $courseID;
 
         return $this;
     }
@@ -68,6 +81,17 @@ class Course
 
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function fetchCoursesById($courseID)
+    {
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM courses WHERE id = :courseID");
+        $statement->bindParam(":courseID", $courseID);
+
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 }
