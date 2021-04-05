@@ -1,5 +1,5 @@
 <?php
-
+include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Question.php");
 
 $question = new Question();
@@ -18,7 +18,7 @@ if(!empty($_POST)) {
             $question->setAntwoord2(htmlspecialchars($_POST['antwoord2']));
             // methode
             $question->saveQuestion();
-            header('Location: index.php');
+            var_dump($question);
         }
         catch (\Throwable $th) {
             $error = $th->getMessage();

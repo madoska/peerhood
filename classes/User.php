@@ -3,21 +3,21 @@
 include_once(__DIR__ . "/Db.php");
 
 class User {
-        private $id;
+        private $userID;
         private $email;
         private $password;
         private $firstname;
         private $lastname;
         private $role;
 
-        public function getId()
+        public function getUserID()
         {
-                return $this->id;
+                return $this->userID;
         }
 
-        public function setId($id)
+        public function setUserID($userID)
         {
-                $this->id = $id;
+                $this->userID = $userID;
 
                 return $this;
         }
@@ -85,7 +85,7 @@ class User {
             // Remove all illegal characters from email
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     
-            // Validate e-mail + check for Thomas More email address
+            // validate e-mail + check for Thomas More email address
             if (filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('|@student.thomasmore.be$|', $email)) {
                 return true;
             } else {
@@ -96,7 +96,7 @@ class User {
         public function emailAvailable($email)
         {
             $pdo = Db::connect();
-            $stmt = $pdo->prepare("SELECT COUNT(userID) FROM users WHERE email = :email");
+            $stmt = $pdo->prepare("SELECT COUNT(id) FROM users WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
             $result = $stmt->fetchColumn();
@@ -164,7 +164,7 @@ class User {
             }
         }
 
-        public function idFromSession($email) {
+        public function userIDFromSession($email) {
             //db conn
             $conn = Db::connect();
             //insert query
@@ -174,6 +174,15 @@ class User {
             //return result
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function fetchRole($userID){
+            $conn = Db::connect();
+            $statement = $conn->prepare('SELECT role_id FROM users WHERE id = :userID');
+            $statement->bindParam(':userID', $userID);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_COLUMN);
             return $result;
         }
 }
