@@ -63,11 +63,11 @@ class Course
     public function fetchCoursesByAdmin($userID)
     {
         $conn = Db::connect();
-        $statement = $conn->prepare("SELECT coursename FROM courses WHERE admin_id = :userID");
+        $statement = $conn->prepare("SELECT id, coursename FROM courses WHERE admin_id = :userID");
         $statement->bindParam(":userID", $userID);
 
         $statement->execute();
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 }

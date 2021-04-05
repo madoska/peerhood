@@ -6,6 +6,7 @@ if ($role = 1) {
     $fetchCourses = new Course();
     $fetchCourses->setUserID($userID);
     $courses = $fetchCourses->fetchCoursesByAdmin($userID);
+} else {
 }
 
 ?>
@@ -22,8 +23,11 @@ if ($role = 1) {
 
 <body>
     <h1>Jouw cursussen</h1>
-    <?php foreach($courses as $course): ?>
-        <li><?php echo $course; ?></li>
+    <?php foreach ($courses as $course) : ?>
+        <a href="course.php?id=<?php echo $course['id'] ?>" class="">
+            <?php echo $course['coursename']; ?>
+        </a>
+        <br>
     <?php endforeach; ?>
 </body>
 
