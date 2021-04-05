@@ -1,6 +1,8 @@
 <?php
-
 include_once(__DIR__ . "/classes/User.php");
+session_start();
+session_destroy();
+
 	$user = new User();
 
 	if(!empty($_POST)) {
@@ -14,8 +16,8 @@ include_once(__DIR__ . "/classes/User.php");
 				$user->setId($id);
 
 				session_start();
-				$_SESSION["user"] = $email; 
-				$_SESSION["id"] = $id;
+				$userID = $user->fetchUserID($email);
+				$_SESSION["user"] = $userID;
 
 				//redirect to index.php
 				header("Location: index.php");

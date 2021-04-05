@@ -16,13 +16,13 @@ if(isset($_POST['submit'])){
             $course->setAdmin_id("1");
             $course->setCoursename($_POST['coursename']);
             $course->setCode($code);
-            $result = $course->createCourse();
+            $result = $course->createCourse($admin_id, $coursename, $code);
                 var_dump($result);
                 if ($result === true){
                     
                     header('Location: https://rammdesign.be/blog.php');
                 }
-                else if($status== false){
+                else if($result== false){
                     echo 'publishing stalled';
                 }
         } else {echo "geen profnaam";}

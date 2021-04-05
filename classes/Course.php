@@ -70,7 +70,7 @@ class Course {
         return $this;
     }
 
-    public function createCourse() {
+    public function createCourse($admin_id, $coursename, $code) {
         //db conn
         $conn = Db::connect();
         //insert query
