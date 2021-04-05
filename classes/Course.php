@@ -2,8 +2,9 @@
 
 include_once(__DIR__ . "/Db.php");
 
-class Course {
-        
+class Course
+{
+
     private $userID;
     private $coursename;
     private $code;
@@ -44,7 +45,8 @@ class Course {
         return $this;
     }
 
-    public function createCourse($userID, $coursename, $code) {
+    public function createCourse($userID, $coursename, $code)
+    {
         //db conn
         $conn = Db::connect();
         //insert query
@@ -55,6 +57,17 @@ class Course {
 
         //return result
         $result = $statement->execute();
+        return $result;
+    }
+
+    public function fetchCoursesByAdmin($userID)
+    {
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT coursename FROM courses WHERE admin_id = :userID");
+        $statement->bindParam(":userID", $userID);
+
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 }
