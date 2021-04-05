@@ -1,6 +1,12 @@
 <?php
-
+include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Course.php");
+
+$fetchRole = new User();
+$fetchRole->setUserID($userID);
+$role = $fetchRole->fetchRole($userID);
+
+echo($userID . $role);
 
 if(isset($_POST['submit'])){
     if(!empty($_POST['coursename'])){

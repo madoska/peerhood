@@ -1,5 +1,5 @@
 <?php
-
+include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Question.php");
 
 $question = new Question();

@@ -11,9 +11,9 @@ session_destroy();
 		if(!empty($email) && !empty($password)){
 			if($user->checkLogin($email, $password)){
 				$user->setEmail($email);
-				$idArray = $user->idFromSession($email);
-				$id = $idArray['id'];
-				$user->setId($id);
+				$userIDArray = $user->userIDFromSession($email);
+				$userID = $userIDArray['userID'];
+				$user->setuserID($userID);
 
 				session_start();
 				$userID = $user->fetchUserID($email);
@@ -34,7 +34,7 @@ session_destroy();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="wuserIDth=device-wuserIDth, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
     <title>Login | peerhood</title>
@@ -55,11 +55,11 @@ session_destroy();
 				<?php endif; ?>
 
                 <div class="form__field">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    <input type="text" class="form-control" userID="email" name="email" placeholder="Email">
 				</div>
 
                 <div class="form__field">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Passwoord">
+                    <input type="password" class="form-control" userID="password" name="password" placeholder="Passwoord">
                 </div>
 
 				<div class="form__field">
