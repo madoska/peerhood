@@ -18,7 +18,7 @@ if(!empty($_POST)) {
             $question->setAntwoord2(htmlspecialchars($_POST['antwoord2']));
             // methode
             $question->saveQuestion();
-            header('Location: index.php');
+            var_dump($question);
         }
         catch (\Throwable $th) {
             $error = $th->getMessage();

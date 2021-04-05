@@ -4,45 +4,27 @@ include_once(__DIR__ . "/Db.php");
 
 class Course {
         
-    private $admin_id;
+    private $userID;
     private $coursename;
     private $code;
 
-
-
-    /**
-     * Get the value of admin_id
-     */ 
-    public function getAdmin_id()
+    public function getUserID()
     {
-        return $this->admin_id;
+        return $this->userID;
     }
 
-    /**
-     * Set the value of admin_id
-     *
-     * @return  self
-     */ 
-    public function setAdmin_id($admin_id)
+    public function setUserID($userID)
     {
-        $this->admin_id = $admin_id;
+        $this->userID = $userID;
 
         return $this;
     }
 
-    /**
-     * Get the value of coursename
-     */ 
     public function getCoursename()
     {
         return $this->coursename;
     }
 
-    /**
-     * Set the value of coursename
-     *
-     * @return  self
-     */ 
     public function setCoursename($coursename)
     {
         $this->coursename = $coursename;
@@ -50,19 +32,11 @@ class Course {
         return $this;
     }
 
-    /**
-     * Get the value of code
-     */ 
     public function getCode()
     {
         return $this->code;
     }
 
-    /**
-     * Set the value of code
-     *
-     * @return  self
-     */ 
     public function setCode($code)
     {
         $this->code = $code;
@@ -70,20 +44,17 @@ class Course {
         return $this;
     }
 
-    public function createCourse($admin_id, $coursename, $code) {
+    public function createCourse($userID, $coursename, $code) {
         //db conn
         $conn = Db::connect();
         //insert query
-        $statement = $conn->prepare("insert into courses (admin_id,coursename,code) VALUES(:admin_id , :coursename , :code)");
-        $statement->bindParam(":admin_id", $admin_id);
+        $statement = $conn->prepare("INSERT INTO courses (admin_id, coursename, code) VALUES(:userID , :coursename , :code)");
+        $statement->bindParam(":userID", $userID);
         $statement->bindParam(":coursename", $coursename);
         $statement->bindParam(":code", $code);
 
         //return result
-        $statement->execute();
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-        if(empty($result)) {
-            return false;
-        }
+        $result = $statement->execute();
+        return $result;
     }
 }
