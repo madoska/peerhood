@@ -2,24 +2,16 @@
 include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Course.php");
 
-$fetchRole = new User();
-$fetchRole->setUserID($userID);
-$role = $fetchRole->fetchRole($userID);
-
-echo ("UserID = " . $userID . " & role = " . $role);
-
 if (isset($_POST['submit'])) {
     if (!empty($_POST['coursename'])) {
         $coursename = $_POST['coursename'];
         $code = substr(md5(uniqid(mt_rand(), true)) , 0, 6);
-        echo($code);
 
         $course = new Course();
         $course->setUserID($userID);
         $course->setCoursename($coursename);
         $course->setCode($code);
         $result = $course->createCourse($userID, $coursename, $code);
-        var_dump($course);
         if ($result === true) {
             echo('success');
         } else if ($result == false) {
@@ -52,6 +44,7 @@ if (isset($_POST['submit'])) {
     <?php } else { ?>
         <p>Alleen docenten kunnen cursussen aanmaken!</p>
     <?php } ?>
+    <a href="index.php">terug</a>
 </body>
 
 </html>

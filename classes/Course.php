@@ -2,9 +2,11 @@
 
 include_once(__DIR__ . "/Db.php");
 
-class Course {
-        
+class Course
+{
+
     private $userID;
+    private $courseID;
     private $coursename;
     private $code;
 
@@ -16,6 +18,18 @@ class Course {
     public function setUserID($userID)
     {
         $this->userID = $userID;
+
+        return $this;
+    }
+
+    public function getCourseID()
+    {
+        return $this->courseID;
+    }
+
+    public function setCourseID($courseID)
+    {
+        $this->courseID = $courseID;
 
         return $this;
     }
@@ -44,7 +58,8 @@ class Course {
         return $this;
     }
 
-    public function createCourse($userID, $coursename, $code) {
+    public function createCourse($userID, $coursename, $code)
+    {
         //db conn
         $conn = Db::connect();
         //insert query
@@ -55,6 +70,28 @@ class Course {
 
         //return result
         $result = $statement->execute();
+        return $result;
+    }
+
+    public function fetchCoursesByAdmin($userID)
+    {
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT id, coursename FROM courses WHERE admin_id = :userID");
+        $statement->bindParam(":userID", $userID);
+
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function fetchCoursesById($courseID)
+    {
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM courses WHERE id = :courseID");
+        $statement->bindParam(":courseID", $courseID);
+
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 }
