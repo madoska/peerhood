@@ -36,7 +36,8 @@ session_destroy();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">    <link rel="stylesheet" href="css/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="build/tailwind.css">	
     <link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
@@ -60,7 +61,7 @@ session_destroy();
 
                 <div class="form_field">
                     <input type="text" class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-5 ml-auto mr-auto block" id="email" name="email" placeholder="Email">
-				        </div>
+				</div>
 
                 <div class="">
                     <input type="password" class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-5 ml-auto mr-auto block" id="password" name="password" placeholder="Wachtwoord">

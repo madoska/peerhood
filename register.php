@@ -79,40 +79,54 @@ if (!empty($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="build/tailwind.css">	
     <title>Register</title>
 </head>
-<body>
+<body class="bg-gray-200 h-screen mx-5 my-10">
+<div class="bg-white h-screen rounded-3xl w-80 md:w-96 ml-auto mr-auto">
+<img class="logo ml-auto mr-auto mb-2 pt-5" src="./images/logo-slogan.png">
+<div class="container">
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    <div>
-        <label for="firstname">First name</label>
-        <input type="text" name="firstname" id="firstname">
+
+<h2 class="form_title text-center mb-14 text-xl md:text-2xl">Registreren</h2>
+
+    <div class="form_field">
+        <input class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-8 ml-auto mr-auto block" placeholder="First name" type="text" name="firstname" id="firstname">
     </div>
-    <div>
-        <label for="lastname">Last name</label>
-        <input type="text" name="lastname" id="lastname">
+
+    <div class="form_field">
+        <input class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-8 ml-auto mr-auto block" placeholder="Last name" type="text" name="lastname" id="lastname">
     </div>
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email">
+
+    <div class="form_field">
+        <input class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-8 ml-auto mr-auto block" placeholder="Email" type="text" name="email" id="email">
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+
+    <div class="form_field">
+        <input class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-8 ml-auto mr-auto block" placeholder="Password" type="password" name="password" id="password">
     </div>
-    <div>
-        <label for="verifyPassword">Verify password</label>
-        <input type="password" name="verifyPassword" id="verifyPassword">
+
+    <div class="form_field">
+        <input class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-8 ml-auto mr-auto block" placeholder="Verify password" type="password" name="verifyPassword" id="verifyPassword">
     </div>
-    <div>
-        <label for="role">Ik ben een...</label>
+
+    <div class="radio-item form_field w-64 md:w-72 mb-8 ml-auto mr-auto block">
+        <label class="mr-2" for="role">Ik ben een...</label>
         <input type="radio" id="student" name="role" value="2">
-            <label for="student">Student</label>
+            <label class="mr-2" for="student">Student</label>
         <input type="radio" id="docent" name="role" value="1">
             <label for="docent">Docent</label>
     </div>
-    <div>
-        <input type="submit" value="Sign up" name="register" id="register">
+
+    <div class="form_button">
+        <input class="form_btn w-64 md:w-72 h-12 shadow-md rounded-2xl text-white mb-2 ml-auto mr-auto block" type="submit" value="Registreren" name="register" id="register">
     </div>
 </form>
+    <div class="text-center text-sm">
+		<a class="form_register" href="login.php">Al geen account? Log je hier in</a>
+	</div>
+</div>
+</div>
 </body>
 </html> 
