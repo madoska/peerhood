@@ -1,0 +1,52 @@
+.form_title, .form_btn, .form_field, .form_register, .form_error {
+    font-family: 'Oswald', sans-serif;
+}
+
+.form_field {
+    outline:none;
+}
+
+.logo {
+    width: 200px;
+}
+
+.form_title {
+    color: #083643;
+    font-weight: 400;
+}
+
+.form_register {
+    color: #083643;
+}
+
+.form_field, .form_btn, .form_register {
+    font-weight: 300;
+}
+
+.form_btn {
+    background-color: #FF7F50;
+}
+
+.form_btn:hover {
+    opacity: .9;
+}
+
+.form_register:hover {
+    color: #FF7F50;
+}
+
+.form_field::placeholder {
+    color: #083643;
+}
+
+.form_error {
+    color: #FF7F50;
+}
+
+/* mediaqueries */
+
+@media screen and (min-width: 768px) {
+    .logo {
+        width: 300px;
+    }
+  }
