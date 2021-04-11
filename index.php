@@ -18,11 +18,13 @@ if ($role = 1) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="build/tailwind.css">
     <title>PEERHOOD | Home</title>
 </head>
 
 <body>
-    <h1>Jouw cursussen</h1>
+    <h1 class="form_title text-xl md:text-2xl">Jouw cursussen</h1>
     <?php foreach ($courses as $course) : ?>
         <a href="course.php?id=<?php echo $course['id'] ?>" class="">
             <?php echo $course['coursename']; ?>
