@@ -50,24 +50,24 @@ if (!empty($_POST['register'])) {
                             $_SESSION['user'] = $userID;
                             header("Location: index.php");
                         } else {
-                            echo "Password too short.";
+                            $error = "Password too short.";
                             $alert = 5;
                         }
                     } else {
-                        echo "Password doesn't match.";
+                        $error = "Password doesn't match.";
                         $alert = 4;
                     }
                 } else {
-                    echo "Email taken.";
+                    $error = "Email taken.";
                     $alert = 3;
                 }
             } else {
-                echo "Only Thomas More emails please.";
+                $error = "Only Thomas More emails please.";
                 $alert = 2;
             }
         }
     } else {
-        echo "Fill all fields out please.";
+        $error = "Fill all fields out please.";
         $alert = 1;
     }
 }
@@ -89,7 +89,15 @@ if (!empty($_POST['register'])) {
 <div class="container">
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
-<h2 class="form_title text-center mb-14 text-xl md:text-2xl">Registreren</h2>
+<h2 class="form_title text-center mb-10 text-xl md:text-2xl">Registreren</h2>
+
+<?php if(isset($error)) : ?>
+	<div class="form_error text-center mb-5">
+		<p class="form_error">
+			<?php echo $error; ?>
+		</p>
+	</div>
+<?php endif; ?>
 
     <div class="form_field">
         <input class="form_field bg-transparent border-b border-black w-64 md:w-72 mb-8 ml-auto mr-auto block" placeholder="First name" type="text" name="firstname" id="firstname">
@@ -124,7 +132,7 @@ if (!empty($_POST['register'])) {
     </div>
 </form>
     <div class="text-center text-sm">
-		<a class="form_register" href="login.php">Al geen account? Log je hier in</a>
+		<a class="form_register" href="login.php">Al een account? Log je hier in</a>
 	</div>
 </div>
 </div>
