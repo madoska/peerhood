@@ -185,4 +185,13 @@ class User {
             $result = $statement->fetch(PDO::FETCH_COLUMN);
             return $result;
         }
+
+        public function fetchPData($userID){
+            $conn = Db::connect();
+            $statement = $conn->prepare('SELECT * FROM users WHERE id = :userID');
+            $statement->bindParam(':userID', $userID);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
 }
