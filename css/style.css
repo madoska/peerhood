@@ -43,6 +43,10 @@
     color: #FF7F50;
 }
 
+.bg-plus {
+    background-color: #FF7F50;
+}
+
 /* mediaqueries */
 
 @media screen and (min-width: 768px) {
