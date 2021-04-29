@@ -32,7 +32,7 @@ if ($role = 1) {
         <div class="flex items-center justify-center w-1/3">
             <div class="w-12 h-12 text-center bg-plus rounded-2xl">
                 <a href="addcourse.php">
-                    <span class="text-5xl font-bold text-white">+</span>
+                    <span class="text-4xl font-bold text-white">+</span>
                 </a>
             </div>
         </div>
