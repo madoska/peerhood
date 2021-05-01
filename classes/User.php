@@ -195,10 +195,11 @@ class User {
             return $result;
         }
 
-        public function changeEmail($email){
+        public function changeEmail(){
             $conn = Db::connect();
-            $statement = $conn->prepare("UPDATE `users` SET `email` = $email WHERE `id` = :userID;");
+            $statement = $conn->prepare("UPDATE `users` SET `email` = :email WHERE `id` = :userID");
             $statement->bindParam(':userID', $userID);
+            $statement->bindParam(':email', $email);
             $result = $statement->execute();
         return $result;
         }
