@@ -194,4 +194,14 @@ class User {
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
+
+        public function changeEmail($email){
+            $conn = Db::connect();
+            $statement = $conn->prepare("UPDATE `users` SET `email` = $email WHERE `id` = :userID;");
+            $statement->bindParam(':userID', $userID);
+            $result = $statement->execute();
+        return $result;
+        }
+
+        
 }
