@@ -14,38 +14,64 @@ $id= $PData["id"];
 
 $user = new User();
 if(isset($_POST['emailOpslaan'])){
-    echo "knop email";
-    if(!empty($_POST)) {
-		$email = htmlspecialchars($_POST['email']);
-		if(!empty($email)){
-			if($user->emailAvailable($email)){
-				$user->setEmail($email);
-				$userID = $id;
+    if(!empty($_POST)){
+        $email = htmlspecialchars($_POST['email']);
+        echo $_POST['email'];
+        if(!empty($email)){
+            $result=$user->emailAvailable($email);
+            if($result==true){
+                echo "goed";
+                $user->setEmail($email);
+                $userID = $id;
 				$user->setuserID($userID);
-
 				var_dump($email, $userID);
-				$result = $user->changeEmail();
+				$result = $user->changeEmail($email, $userID);
+                echo $result;
 				if ($result==true){
                     echo"query gelukt";
+                    header('Location:index.php');
                 }
                 else if($result==false){
                     echo"query gefaald";
                 }
-				//redirect to index.php
-				
-			}
             else{
-				$error = "Email is leeg";
-			}
-		}
-        else {
-			$error = "Email kan niet leeg zijn";
-		}
+                echo "email al in gebruik";
+            }
+        }
+        else{ $error="speciaal teken niet ondersteund";}
+    }
+    else{$error="mag niet leeg zijn";}
 }
+}
+
+$user = new User();
 if(isset($_POST['WWOpslaan'])){
-    echo "knop ww gedrukt";
+    if(!empty($_POST)){
+        $password = htmlspecialchars($_POST['password']);
+        echo $_POST['password'];
+        if(!empty($password)){
+            
+                
+                $user->setPassword($password);
+                $userID = $id;
+				$user->setuserID($userID);
+				var_dump($password, $userID);
+				$result = $user->changePass($password, $userID);
+                echo $result;
+				if ($result==true){
+                    echo"query gelukt";
+                    header('Location:index.php');
+                }
+                else if($result==false){
+                    echo"query gefaald";
+                }
+        }
+        else{ $error="speciaal teken niet ondersteund";}
+    }
+    else{$error="mag niet leeg zijn";}
 }
-}
+
+
 ?>
 
 <!DOCTYPE html>
