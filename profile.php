@@ -24,7 +24,7 @@ if(isset($_POST['emailOpslaan'])){
 				$user->setuserID($userID);
 
 				var_dump($email, $userID);
-				$result = $user->changeEmail($email);
+				$result = $user->changeEmail();
 				if ($result==true){
                     echo"query gelukt";
                 }
