@@ -47,6 +47,14 @@
     background-color: #FF7F50;
 }
 
+.bg-secondary-button {
+    background-color: #B8ECD7;
+}
+
+.gradient {
+    background: linear-gradient(137deg, rgba(208,230,165,1) 0%, rgba(134,227,206,1) 100%);
+}
+
 /* mediaqueries */
 
 @media screen and (min-width: 768px) {

@@ -24,7 +24,7 @@ if ($role = 1) {
 </head>
 
 <body>
-    <div class="px-5 py-5 mb-10 bg-gray-400 rounded-b-xl">
+    <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
         <h2 class="ml-10 text-2xl text-white form_title">Een overzicht van jouw vakken</h2>
     </div>
     <div class="flex items-center mb-10">

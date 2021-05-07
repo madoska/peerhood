@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <div class="px-5 py-5 mb-10 bg-gray-400 rounded-b-xl">
+    <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
         <h2 class="ml-10 text-2xl text-white form_title">Welk vak geef jij?</h2>
     </div>
     <h2 class="w-2/3 ml-10 text-2xl mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
