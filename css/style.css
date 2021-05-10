@@ -19,6 +19,10 @@
     color: #083643;
 }
 
+.dark_text {
+    color: #083643;
+}
+
 .form_field, .form_btn, .form_register {
     font-weight: 300;
 }
