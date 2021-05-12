@@ -22,7 +22,7 @@ if (!empty($_POST['addstudent'])) {
     $addStudents->setStudentID($studentID);
     $done = $addStudents->addStudents($studentID, $teamID);
 
-    echo "Student toegevoegd";
+    $message = "Student toegevoegd";
 }
 
 ?>
@@ -44,12 +44,24 @@ if (!empty($_POST['addstudent'])) {
         <h1 class="text-3xl text-center text-white form_title">Dag</h1>
     </div>
 
+    <?php if (isset($message)) : ?>
+        <div class="mb-5 text-center form_error">
+            <p class="form_error">
+                <?php echo $message; ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
     <h1 class="mb-10 text-2xl text-center form_title md:text-2xl">Voeg studenten toe</h1>
     <form action="" method="post">
-        <?php foreach ($students as $student) : ?>
-            <input type="checkbox" id="student" name="student" value="<?php echo $student['student_id'] ?>">
-            <label for="student"><?php echo $student['firstname'] . " " . $student['lastname'] ?></label><br>
-        <?php endforeach ?>
+        <div class="mb-5">
+            <?php foreach ($students as $student) : ?>
+                <div class="mb-2 text-center">
+                    <input type="checkbox" id="student" name="student" value="<?php echo $student['student_id'] ?>">
+                    <label for="student"><?php echo $student['firstname'] . " " . $student['lastname'] ?></label><br>
+                </div>
+            <?php endforeach ?>
+        </div>
         <input class="block h-12 mb-2 ml-auto mr-auto text-center text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Voeg studenten toe" name="addstudent">
     </form>
 </body>
