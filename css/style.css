@@ -31,6 +31,10 @@
     background-color: #FF7F50;
 }
 
+.secondary_btn {
+    background-color: #B8ECD7;
+}
+
 .form_btn:hover {
     opacity: .9;
 }
