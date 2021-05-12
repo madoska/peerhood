@@ -36,9 +36,9 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
-        <h2 class="ml-10 text-2xl text-white form_title">Welk vak geef jij?</h2>
+        <h2 class="text-2xl text-center text-white form_title">Welk vak geef jij?</h2>
     </div>
-    <h2 class="w-2/3 ml-10 text-2xl mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
+    <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
     <?php if ($role == 1) { ?>
         <form class="form" action="" method="post">
             <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="coursename" placeholder="Naam van jouw vak">
@@ -50,5 +50,9 @@ if (isset($_POST['submit'])) {
     <?php } ?>
     <a href="index.php">terug</a>
 </body>
+
+<footer>
+    <?php include_once('nav.inc.php'); ?>
+</footer>
 
 </html>
