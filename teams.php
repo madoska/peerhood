@@ -17,20 +17,33 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="build/tailwind.css">
     <title>PEERHOOD | <?php echo $course['coursename'] ?> Groups</title>
 </head>
+
 <body>
-    <h1><?php echo $course['coursename'] ?></h1>
+    <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
+        <h1 class="text-3xl text-center text-white form_title">Dag</h1>
+    </div>
+
+    <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $course['coursename'] ?></h1>
     <?php foreach ($teams as $team) : ?>
-        <a href="team.php?id=<?php echo $team['id'] ?>" class="">
+        <a class="block w-64 h-12 py-2 ml-auto mr-auto text-center shadow-md hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="team.php?id=<?php echo $team['id'] ?>">
             <?php echo $team['teamname']; ?>
         </a>
         <br>
     <?php endforeach; ?>
-    <a href="addteam.php?id=<?php echo $course['id'] ?>">Nieuwe team</a>
+    <a href="addteam.php?id=<?php echo $course['id'] ?>">Nieuw team</a>
 </body>
+
+<footer>
+    <?php include_once('nav.inc.php'); ?>
+</footer>
+
 </html>
