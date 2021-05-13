@@ -2,6 +2,7 @@
 include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/User.php");
 
+//test
 if ($role = 1) {
     $fetchPData = new User();
     $fetchPData->setUserID($userID);
