@@ -185,4 +185,34 @@ class User {
             $result = $statement->fetch(PDO::FETCH_COLUMN);
             return $result;
         }
+
+        public function fetchPData($userID){
+            $conn = Db::connect();
+            $statement = $conn->prepare('SELECT * FROM users WHERE id = :userID');
+            $statement->bindParam(':userID', $userID);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function changeEmail($email, $userID){
+            $conn = Db::connect();
+            $statement = $conn->prepare("UPDATE `users` SET `email` = :email WHERE `id` = :userID");
+            $statement->bindParam(':userID', $userID);
+            $statement->bindParam(':email', $email);
+            $result = $statement->execute();
+        return $result;
+        }
+
+        public function changePass($password, $userID){
+            $conn = Db::connect();
+            $statement = $conn->prepare("UPDATE `users` SET `password` = :password WHERE `id` = :userID");
+            $password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+            $statement->bindParam(':userID', $userID);
+            $statement->bindParam(':password', $password);
+            $result = $statement->execute();
+        return $result;
+        }
+
+        
 }
