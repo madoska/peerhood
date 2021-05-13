@@ -3,6 +3,10 @@ include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Course.php");
 include_once(__DIR__ . "/classes/Team.php");
 
+$fetchPData = new User();
+$fetchPData->setUserID($userID);
+$PData = $fetchPData->fetchPData($userID);
+
 if (isset($_GET['id'])) {
     $courseID = $_GET['id'];
     $fetchCoursesById = new Course();
@@ -29,7 +33,7 @@ if (isset($_GET['id'])) {
 
 <body>
     <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
-        <h1 class="text-3xl text-center text-white form_title">Dag</h1>
+        <h1 class="text-3xl text-center text-white form_title">Dag <?php echo $PData['firstname'] ?></h1>
     </div>
 
     <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $course['coursename'] ?></h1>

@@ -191,9 +191,9 @@ class User {
             //db conn
             $conn = Db::connect();
             //insert query
-            $statement = $conn->prepare("select * from users where id = :id");
-            $id = $this->getUserID();
-            $statement->bindParam(":id", $id);
+            $statement = $conn->prepare("select * from users where id = :userID");
+            $userID = $this->getUserID();
+            $statement->bindParam(':userID', $userID);
 
             //return result
             $statement->execute();

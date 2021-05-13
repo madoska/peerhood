@@ -2,6 +2,10 @@
 include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Question.php");
 
+$fetchPData = new User();
+$fetchPData->setUserID($userID);
+$PData = $fetchPData->fetchPData($userID);
+
 $question = new Question();
 
 if (!empty($_POST)) {
@@ -40,7 +44,7 @@ if (!empty($_POST)) {
 
 <body>
     <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
-        <h1 class="text-3xl text-center text-white form_title">Dag</h1>
+        <h1 class="text-3xl text-center text-white form_title">Dag <?php echo $PData['firstname'] ?></h1>
     </div>
 
     <h2 class="mb-5 text-2xl text-center form_title md:text-2xl">Meerkeuzevraag maken</h2>
