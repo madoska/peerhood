@@ -1,6 +1,20 @@
 <?php
 include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Course.php");
+include_once(__DIR__ . "/classes/Team.php");
+include_once(__DIR__ . "/classes/User.php");
+
+//rolecheck
+if ($role != 1) {
+    $fetchPData = new User();
+    $fetchPData->setUserID($userID);
+    $PData = $fetchPData->fetchPData($userID);
+    
+} else {
+}
+
+$id= $PData["id"];
+
 
 if (isset($_POST['submit']) && $role == 1) {
     if (!empty($_POST['coursename'])) {
@@ -23,7 +37,38 @@ if (isset($_POST['submit']) && $role == 1) {
 }
 
 if (isset($_POST['controleer'])) {
-   var_dump("123");
+    $cn = $_POST['CheckName'];
+    $cc = $_POST['CheckCode'];
+    $course = new Course();
+    $result = $course->checkCode($cn);
+    //check codes
+
+    foreach ($result as $cr) {
+        $code2check = $cr['code'];
+        $course_id = $cr['id'];
+    }
+    
+   //compare
+
+   if($cc===$code2check){
+       $team = new Team();
+        $r = $team->fetchStudentsGroups($course_id);
+        shuffle($r);
+        $newR=$r[0];
+        $rnew = (int) $newR;
+
+        //Add student to groups
+        $newly = new Team();
+        $newly->setTeamID($rnew);
+        $newly->setStudentID($id);
+        $n = $newly->addStudents($id, $rnew);
+        //var_dump($id);
+        var_dump($rnew);
+        
+   }
+   else{
+    var_dump('nope');
+   }
 }
 
 ?>
