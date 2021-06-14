@@ -23,7 +23,7 @@ if (isset($_POST['submit']) && $role == 1) {
 }
 
 if (isset($_POST['controleer'])) {
-   
+   var_dump("123");
 }
 
 ?>
