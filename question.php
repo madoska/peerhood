@@ -51,7 +51,7 @@ if (!empty($_POST)) {
     <form action="" method="POST">
 
         <?php if (isset($error)) : ?>
-            <div class="form__error">
+            <div class="mb-5 text-center form_error">
                 <p>
                     <?php echo $error; ?>
                 </p>
