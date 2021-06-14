@@ -28,7 +28,7 @@ if ($role = 1) {
 </head>
 
 <body>
-    <div class="px-5 py-5 mb-10 ml-auto mr-auto  gradient rounded-b-xl">
+    <div class="px-5 py-5 mb-10 ml-auto mr-auto gradient rounded-b-xl">
         <h1 class="mb-5 text-3xl text-center text-white form_title">Dag <?php echo $PData['firstname'] ?></h1>
         <h2 class="text-2xl text-center text-white form_title">Een overzicht van jouw vakken</h2>
     </div>
