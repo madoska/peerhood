@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
         </a>
         <br>
     <?php endforeach; ?>
-    <a href="addteam.php?id=<?php echo $course['id'] ?>">Nieuw team</a>
+    <a class="block w-64 h-12 py-2 ml-auto mr-auto text-center text-white shadow-md hover:opacity-90 form_btn md:w-72 rounded-2xl" href="addteam.php?id=<?php echo $course['id'] ?>">Nieuw team</a>
 </body>
 
 <footer>
