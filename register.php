@@ -84,8 +84,8 @@ if (!empty($_POST['register'])) {
     <title>Register</title>
 </head>
 
-<body class="h-screen mx-5 my-10 bg-gray-200">
-    <div class="h-screen ml-auto mr-auto bg-white rounded-3xl w-60 sm:w-80 md:w-96">
+<body class="h-screen gradient">
+    <div class="h-auto pb-10 mx-5 my-10 ml-auto mr-auto bg-white rounded-3xl w-60 sm:w-80 md:w-96">
         <img class="pt-5 mb-2 ml-auto mr-auto logo" src="./images/logo-slogan.png">
         <div class="container">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
