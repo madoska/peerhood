@@ -91,7 +91,7 @@ if (isset($_POST['WWOpslaan'])) {
     <div class="h-auto pb-20 mx-5 my-10 ml-auto mr-auto bg-white rounded-3xl w-60 sm:w-80 md:w-96">
         <div class="container">
             <h1 class="text-2xl text-center pt-14 mb-14 form_title md:text-2xl">Jouw profiel</h1>
-            <div class="mb-2 text-center">
+            <div class="mb-2 text-center form_field">
                 <span><?php echo $PData["firstname"] . ' ' . $PData["lastname"] ?></span>
             </div>
             <br>

@@ -73,10 +73,6 @@
   );
 }
 
-.bg-plus2 {
-  background-color: #ff7f50;
-}
-
 /* mediaqueries */
 
 @media screen and (min-width: 768px) {

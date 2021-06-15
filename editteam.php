@@ -58,7 +58,7 @@ if (!empty($_POST['addstudent'])) {
             <?php foreach ($students as $student) : ?>
                 <div class="mb-2 text-center">
                     <input type="checkbox" id="student" name="student" value="<?php echo $student['student_id'] ?>">
-                    <label for="student"><?php echo $student['firstname'] . " " . $student['lastname'] ?></label><br>
+                    <label class="form_field" for="student"><?php echo $student['firstname'] . " " . $student['lastname'] ?></label><br>
                 </div>
             <?php endforeach ?>
         </div>
