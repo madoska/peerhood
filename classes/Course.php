@@ -73,6 +73,20 @@ class Course
         return $result;
     }
 
+    public function checkCode($cn)
+    {
+        //db conn
+        $conn = Db::connect();
+        //insert query
+        $statement = $conn->prepare("SELECT * FROM courses WHERE coursename = :cn");
+        $statement->bindParam(":cn", $cn);
+
+        $statement->execute();
+        //return result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function fetchCoursesByAdmin($userID)
     {
         $conn = Db::connect();

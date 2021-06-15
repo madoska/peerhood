@@ -115,4 +115,14 @@ class Team
         $result = $statement->execute();
         return $result;
     }
+    public function fetchStudentsGroups($courseID){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT team_id FROM members INNER JOIN teams ON members.team_id = teams.id WHERE course_id = :courseID");
+        $statement->bindParam(":courseID", $courseID);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
 }
