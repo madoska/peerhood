@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Course.php");
+include_once(__DIR__ . "/classes/Team.php");
+
 
 $fetchPData = new User();
 $fetchPData->setUserID($userID);
@@ -12,6 +14,10 @@ if ($role = 1) {
     $courses = $fetchCourses->fetchCoursesByAdmin($userID);
 } else {
 }
+
+$getUserCourses = new Team();
+$getUserCourses->setStudentID($userID);
+$userCourses = $getUserCourses->fetchCourseForUser($userID);
 
 ?>
 
@@ -44,6 +50,13 @@ if ($role = 1) {
         </div>
     </div>
     <?php foreach ($courses as $course) : ?>
+        <a class="block w-64 h-12 py-2 mb-2 ml-auto mr-auto text-center text-white shadow-md form_field hover:opacity-90 md:w-72 rounded-2xl" href="course.php?id=<?php echo $course['id'] ?>" style='background-color:<?php printf("#%06X\n", mt_rand(0, 0x222222)); ?>'>
+            <?php echo $course['coursename']; ?>
+        </a>
+        <br>
+    <?php endforeach; ?>
+
+    <?php foreach ($userCourses as $course) : ?>
         <a class="block w-64 h-12 py-2 mb-2 ml-auto mr-auto text-center text-white shadow-md form_field hover:opacity-90 md:w-72 rounded-2xl" href="course.php?id=<?php echo $course['id'] ?>" style='background-color:<?php printf("#%06X\n", mt_rand(0, 0x222222)); ?>'>
             <?php echo $course['coursename']; ?>
         </a>

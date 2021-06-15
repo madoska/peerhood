@@ -52,18 +52,19 @@ if (isset($_POST['controleer'])) {
 
    if($cc===$code2check){
        $team = new Team();
-        $r = $team->fetchStudentsGroups($course_id);
+        $r = $team->fetchAvailableGroups($course_id);
         shuffle($r);
         $newR=$r[0];
-        $rnew = (int) $newR;
+        $newRString = implode(" ",$newR);
+        $rnew = (int)$newRString;
+        echo ($rnew);
 
         //Add student to groups
         $newly = new Team();
-        $newly->setTeamID($rnew);
+        $newly->setTeamID($newR);
         $newly->setStudentID($id);
         $n = $newly->addStudents($id, $rnew);
         //var_dump($id);
-        var_dump($rnew);
         
    }
    else{
@@ -93,6 +94,8 @@ if (isset($_POST['controleer'])) {
     </div>
     <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
 
+    <?php } ?>
+
     <?php if (isset($error)) : ?>
         <div class="mb-5 text-center form_error">
             <p class="form_error">
@@ -111,7 +114,7 @@ if (isset($_POST['controleer'])) {
     <?php } else { ?>
 
         <h2 class="text-2xl text-center text-white form_title">Welk vak volg jij?</h2>
-    </div>
+    
     <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
     <form class="form" action="" method="post">
         <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="CheckName" placeholder="Naam van het vak">
@@ -121,10 +124,9 @@ if (isset($_POST['controleer'])) {
             <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Controleer" name="controleer">
             </form>
     <?php } ?>
-</body>
 
-<footer>
+    <footer>
     <?php include_once('nav.inc.php'); ?>
-</footer>
-
+    </footer>
+</body>
 </html>
