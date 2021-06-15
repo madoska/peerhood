@@ -36,7 +36,6 @@ if (!empty($_POST)) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="build/tailwind.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -44,8 +43,8 @@ if (!empty($_POST)) {
 	<title>Login | peerhood</title>
 </head>
 
-<body class="h-screen mx-5 my-10 bg-gray-200">
-	<div class="h-screen ml-auto mr-auto bg-white rounded-3xl w-60 sm:w-80 md:w-96">
+<body class="h-screen gradient">
+	<div class="h-auto pb-10 mx-5 my-10 ml-auto mr-auto bg-white rounded-3xl w-60 sm:w-80 md:w-96">
 		<img class="pt-5 mb-2 ml-auto mr-auto logo" src="./images/logo-slogan.png">
 		<div class="container">
 			<div class="">
@@ -61,11 +60,11 @@ if (!empty($_POST)) {
 					<?php endif; ?>
 
 					<div class="form_field">
-						<input type="text" class="block mb-5 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" id="email" name="email" placeholder="Email">
+						<input type="text" class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 sm:w-64 form_field md:w-72" id="email" name="email" placeholder="Email">
 					</div>
 
-					<div class="">
-						<input type="password" class="block mb-5 ml-auto mr-auto bg-transparent border-b border-black w-52 sm:w-64 form_field md:w-72" id="password" name="password" placeholder="Wachtwoord">
+					<div class="form_field">
+						<input type="password" class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 sm:w-64 form_field md:w-72" id="password" name="password" placeholder="Wachtwoord">
 					</div>
 
 					<div class="form_button">

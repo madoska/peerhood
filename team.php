@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
     <h1 class="mb-10 text-2xl text-center form_title md:text-2xl"><?php echo $team['teamname'] ?></h1>
     <div class="mb-5">
         <?php foreach ($members as $member) : ?>
-            <li class="py-2 text-center list-none"><?php echo $member['firstname'] . " " . $member['lastname'] ?></li>
+            <li class="py-2 text-center list-none form_field"><?php echo $member['firstname'] . " " . $member['lastname'] ?></li>
         <?php endforeach; ?>
     </div>
     <a class="block h-12 pt-2 mb-2 ml-auto mr-auto text-center text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" href="editteam.php?id=<?php echo $team['id'] ?>" class="">

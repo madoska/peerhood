@@ -27,12 +27,12 @@ if (isset($_POST['submit']) && $role == 1) {
         $course->setCode($code);
         $result = $course->createCourse($userID, $coursename, $code);
         if ($result === true) {
-            echo ('success');
+            $error = "De cursus is succesvol opgeslagen";
         } else if ($result == false) {
-            echo ('stalled');
+            $error = "Er ging iets mis, probeer nog eens";
         }
     } else {
-        echo "geen cursusnaam";
+        $error = "Naam van cursus mag niet leeg zijn";
     }
 }
 
@@ -85,13 +85,23 @@ if (isset($_POST['controleer'])) {
 </head>
 
 <body>
-    <div class="px-5 py-5 mb-10 gradient rounded-b-xl">
+    <div class="px-5 py-5 mb-10 ml-auto mr-auto gradient rounded-b-xl">
       
     <?php if ($role == 1) { ?>
 
         <h2 class="text-2xl text-center text-white form_title">Welk vak geef jij?</h2>
     </div>
     <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
+
+    <?php if (isset($error)) : ?>
+        <div class="mb-5 text-center form_error">
+            <p class="form_error">
+                <?php echo $error; ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($role == 1) { ?>
 
         <form class="form" action="" method="post">
             <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="coursename" placeholder="Naam van jouw vak">
@@ -111,7 +121,6 @@ if (isset($_POST['controleer'])) {
             <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Controleer" name="controleer">
             </form>
     <?php } ?>
-    <a href="index.php">terug</a>
 </body>
 
 <footer>
