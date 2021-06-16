@@ -23,6 +23,12 @@ if (isset($_GET['id'])) {
     $fetchTeam->setStudentID($userID);
     $fetchTeam->setCourseID($courseID);
     $team = $fetchTeam->fetchTeamByCourseForUser($userID, $courseID);
+
+    $teamID = $team['team_id'];
+    $fetchPosts = new Forum();
+    $fetchPosts->setTeamID($teamID);
+    $posts = $fetchPosts->getForumPosts($teamID);
+    var_dump($posts);
 }
 
 if (!empty($_POST['submitPost'])) {
@@ -33,7 +39,7 @@ if (!empty($_POST['submitPost'])) {
         $postForum->setStudentID($userID);
         $postForum->setTeamID($teamID);
         $postForum->setPostContent($postContent);
-        $post = $postForum->postForum($userID, $teamID, $postContent);
+        $posts = $postForum->postForum($userID, $teamID, $postContent);
     }
 }
 
@@ -67,6 +73,13 @@ if (!empty($_POST['submitPost'])) {
             <br>
             <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Post" name="submitPost">
         </form>
+
+        <?php foreach($posts as $post): ?>
+            <div class="forumpost">
+                <h3><?php echo $post['firstname'] . " " . $post['lastname'] ?></h3>
+                <article><?php echo $post['content'] ?></article>
+            </div>
+        <?php endforeach ?>
     <?php endif ?>
 </body>
 

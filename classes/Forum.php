@@ -20,6 +20,15 @@ class Forum
         return $result;
     }
 
+    public function getForumPosts($teamID){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON users.id = posts.user_id WHERE team_id = :teamID");
+        $statement->bindParam(":teamID", $teamID);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getTeamID()
     {
         return $this->teamID;
@@ -80,4 +89,3 @@ class Forum
         return $this;
     }
 }
-?>
