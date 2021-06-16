@@ -22,7 +22,7 @@ class Forum
 
     public function getForumPosts($teamID){
         $conn = Db::connect();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON users.id = posts.user_id WHERE team_id = :teamID");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON users.id = posts.user_id WHERE team_id = :teamID ORDER BY posts.id DESC");
         $statement->bindParam(":teamID", $teamID);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
