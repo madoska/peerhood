@@ -68,6 +68,16 @@ class Team
         return $result;
     }
 
+    public function fetchCourseByID($courseID)
+    {
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM courses WHERE course_id = :courseID");
+        $statement->bindParam(":courseID", $courseID);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function fetchTeamById($teamID){
         $conn = Db::connect();
         $statement = $conn->prepare("SELECT * FROM teams WHERE id = :teamID");
@@ -135,10 +145,20 @@ class Team
 
     public function fetchCourseForUser($studentID){
         $conn = Db::connect();
-        $statement = $conn->prepare("SELECT coursename FROM users AS user INNER JOIN members AS member ON user.id = member.student_id INNER JOIN teams AS team ON team.id = member.team_id INNER JOIN courses AS course ON course.id = team.course_id WHERE user.id = :userID");
+        $statement = $conn->prepare("SELECT * FROM users AS user INNER JOIN members AS member ON user.id = member.student_id INNER JOIN teams AS team ON team.id = member.team_id INNER JOIN courses AS course ON course.id = team.course_id WHERE user.id = :userID");
         $statement->bindParam(":userID", $studentID);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function fetchTeamByCourseForUser($studentID, $courseID){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM users AS user INNER JOIN members AS member ON user.id = member.student_id INNER JOIN teams AS team ON team.id = member.team_id INNER JOIN courses AS course ON course.id = team.course_id WHERE user.id = :userID AND team.course_id = :courseID");
+        $statement->bindParam(":userID", $studentID);
+        $statement->bindParam(":courseID", $courseID);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 }

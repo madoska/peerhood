@@ -27,7 +27,7 @@ if (isset($_POST['submit']) && $role == 1) {
         $course->setCode($code);
         $result = $course->createCourse($userID, $coursename, $code);
         if ($result === true) {
-            $error = "De cursus is succesvol opgeslagen";
+            $error = "De cursus is succesvol aangemaakt";
         } else if ($result == false) {
             $error = "Er ging iets mis, probeer nog eens";
         }
@@ -57,7 +57,6 @@ if (isset($_POST['controleer'])) {
         $newR=$r[0];
         $newRString = implode(" ",$newR);
         $rnew = (int)$newRString;
-        echo ($rnew);
 
         //Add student to groups
         $newly = new Team();
@@ -66,6 +65,7 @@ if (isset($_POST['controleer'])) {
         $n = $newly->addStudents($id, $rnew);
         //var_dump($id);
         
+        $error = "Je bent aangemeld voor dit vak!";
    }
    else{
     var_dump('nope');

@@ -108,4 +108,5 @@ class Course
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+    
 }
