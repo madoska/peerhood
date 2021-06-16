@@ -1,10 +1,12 @@
 <?php
 include_once(__DIR__ . "/inc/session.inc.php");
 include_once(__DIR__ . "/classes/Question.php");
+include_once(__DIR__ . "/classes/Course.php");
 
 $fetchPData = new User();
 $fetchPData->setUserID($userID);
 $PData = $fetchPData->fetchPData($userID);
+
 
 $question = new Question();
 
@@ -22,7 +24,7 @@ if (!empty($_POST)) {
             $question->setAntwoord2(htmlspecialchars($_POST['antwoord2']));
             // methode
             $question->saveQuestion();
-            var_dump($question);
+            //var_dump($question);
         } catch (\Throwable $th) {
             $error = $th->getMessage();
         }

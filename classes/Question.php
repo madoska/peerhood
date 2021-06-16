@@ -76,13 +76,17 @@ class Question {
         $conn = Db::connect();
 
         // query
-        $statement = $conn->prepare("insert into questions (course_id, question, solution_id) values (1, :vraag, 1)");
+        $statement = $conn->prepare("insert into questions (course_id, question, antwoord1, antwoord2, solution_id) values (1, :vraag, :antwoord1, :antwoord2, 1)");
         
         // variabelen klaarzetten om te binden
         $vraag = $this->getVraag();
+        $antwoord1 = $this->getAntwoord1();
+        $antwoord2 = $this->getAntwoord2();
         
         // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
         $statement->bindParam(":vraag", $vraag);
+        $statement->bindParam(":antwoord1", $antwoord1);
+        $statement->bindParam(":antwoord2", $antwoord2);
        
 
         // als je geen execute doet dan wordt die query niet uitgevoerd
