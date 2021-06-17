@@ -105,6 +105,10 @@ if (isset($_GET['id'])) {
                 </div>
             <?php endforeach ?>
         </div>
+
+        <div class="quiz">
+            <a href="">Nieuwe quiz!</a>
+        </div>
     <?php endif ?>
 
     <script>
