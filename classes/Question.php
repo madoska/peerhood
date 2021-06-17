@@ -105,12 +105,21 @@ class Question {
         return $this;
     }
 
-    public function fetchLatestQuizByTeam($courseID){
+    public function fetchLatestQuizByTeam($course_id){
         $conn = Db::connect();
-        $statement = $conn->prepare("SELECT * FROM comments AS comment INNER JOIN users AS user ON user.id = comment.user_id WHERE comment.post_id = :postID");
-        $statement->bindParam(":postID", $courseID);
+        $statement = $conn->prepare("SELECT * FROM questions WHERE questions.course_id = :courseID ORDER BY questions.id DESC LIMIT 1");
+        $statement->bindParam(":courseID", $course_id);
         $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function fetchQuestions($course_id){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT correct_answer, false_answer1, false_answer2 FROM questions WHERE questions.course_id = :courseID ORDER BY questions.id DESC LIMIT 1");
+        $statement->bindParam(":courseID", $course_id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 

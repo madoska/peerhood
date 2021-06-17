@@ -107,7 +107,7 @@ if (isset($_GET['id'])) {
         </div>
 
         <div class="quiz">
-            <a href="">Nieuwe quiz!</a>
+            <a href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz!</a>
         </div>
     <?php endif ?>
 
