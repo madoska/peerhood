@@ -19,9 +19,13 @@ if ($role === "2") {
     var_dump($a);
 }
 
+if (isset($_POST['submitAnswer'])) {
+    $answer = $_POST['radio'];
+}
+
 $question = new Question();
 
-if (!empty($_POST)) {
+if (!empty($_POST['submitQuestion'])) {
 
     if (!empty($_POST['vraag'])) {
         $vraag = $_POST['vraag'];
@@ -91,7 +95,7 @@ if (!empty($_POST)) {
                 <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="foutantwoord2" id="foutantwoord2" placeholder="Fout antwoord 2">
             </div>
             <div>
-                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Post quiz">
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" name="submitQuestion" value="Post quiz">
             </div>
         </form>
 
@@ -99,14 +103,14 @@ if (!empty($_POST)) {
         <h2><?php echo $q['question'] ?></h2>
 
         <form action="" method="POST">
-            <input type="radio" id="answer1" name="answer1" value="<?php echo $randomA = $a[0];  ?>">
+            <input type="radio" id="answer1" name="radio" value="<?php echo $randomA = $a[0];  ?>">
             <label for="answer1"><?php echo $randomA = $a[0]; ?></label><br>
-            <input type="radio" id="answer2" name="answer2" value="<?php echo $randomA = $a[1];  ?>">
+            <input type="radio" id="answer2" name="radio" value="<?php echo $randomA = $a[1];  ?>">
             <label for="answer2"><?php echo $randomA = $a[1]; ?></label><br>
-            <input type="radio" id="answer3" name="answer3" value="<?php echo $randomA = $a[2];  ?>">
+            <input type="radio" id="answer3" name="radio" value="<?php echo $randomA = $a[2];  ?>">
             <label for="answer3"><?php echo $randomA = $a[2]; ?></label><br>
             <div>
-                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Indienen">
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" name="submitAnswer" type="submit" value="Indienen">
             </div>
         </form>
 
