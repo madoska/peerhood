@@ -5,8 +5,9 @@ include_once(__DIR__ . "/Db.php");
 class Question {
     private $onderwerp;
     private $vraag;
-    private $antwoord1;
-    private $antwoord2;  
+    private $correctantwoord;
+    private $foutantwoord1;
+    private $foutantwoord2;  
     private $course_id;
     private $solution_id;
 
@@ -40,53 +41,47 @@ class Question {
         return $this;
     }
 
-    public function getAntwoord1() {
+    public function getFoutantwoord1() {
 
-        return $this->antwoord1;
+        return $this->foutantwoord1;
     }
  
-    public function setAntwoord1($antwoord1) {
+    public function setFoutantwoord1($foutantwoord1) {
 
-        if(empty($antwoord1)) {
+        if(empty($foutantwoord1)) {
             throw new Exception("Het antwoord mag niet leeg zijn!");
         }
 
-        $this->antwoord1 = $antwoord1;
+        $this->foutantwoord1 = $foutantwoord1;
 
         return $this;
     }
 
-    public function getAntwoord2() {
-        return $this->antwoord2;
+    public function getFoutantwoord2() {
+        return $this->foutantwoord2;
     }
 
-    public function setAntwoord2($antwoord2) {
+    public function setFoutantwoord2($foutantwoord2) {
 
-        if(empty($antwoord2)) {
-            throw new Exception("Het antwoord mag niet leeg zijn!");
+        if(empty($foutantwoord2)) {
+            throw new Exception("Het foutantwoord mag niet leeg zijn!");
         }
 
-        $this->antwoord2 = $antwoord2;
+        $this->foutantwoord2 = $foutantwoord2;
 
         return $this;
     }
 
-    public function saveQuestion() {
-        // connectie
+    public function saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2) {
         $conn = Db::connect();
-
-        // query
-        $statement = $conn->prepare("insert into questions (course_id, question, solution_id) values (1, :vraag, 1)");
-        
-        // variabelen klaarzetten om te binden
-        $vraag = $this->getVraag();
-        
-        // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
-        $statement->bindParam(":vraag", $vraag);
-       
-
-        // als je geen execute doet dan wordt die query niet uitgevoerd
-        $result = $statement->execute();
+        $statement = $conn->prepare("insert into questions (course_id, question, correct_answer, false_answer1, false_answer2) values (:courseID, :question, :correct_answer, :false_answer1, :false_answer2)");
+        $statement->bindParam(":courseID", $course_id);
+        $statement->bindParam(":question", $vraag);
+        $statement->bindParam(":correct_answer", $correctantwoord);
+        $statement->bindParam(":false_answer1", $foutantwoord1);
+        $statement->bindParam(":false_answer2", $foutantwoord2);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
 }
 
@@ -106,6 +101,37 @@ class Question {
 
     public function setSolution_id($solution_id) {
         $this->solution_id = $solution_id;
+
+        return $this;
+    }
+
+    public function fetchLatestQuizByTeam($courseID){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM comments AS comment INNER JOIN users AS user ON user.id = comment.user_id WHERE comment.post_id = :postID");
+        $statement->bindParam(":postID", $courseID);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    /**
+     * Get the value of correctantwoord
+     */
+    public function getCorrectantwoord()
+    {
+        return $this->correctantwoord;
+    }
+
+    /**
+     * Set the value of correctantwoord
+     */
+    public function setCorrectantwoord($correctantwoord)
+    {
+        if(empty($correctantwoord)) {
+            throw new Exception("Het antwoord mag niet leeg zijn!");
+        }
+
+        $this->correctantwoord = $correctantwoord;
 
         return $this;
     }

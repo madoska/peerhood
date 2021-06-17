@@ -16,12 +16,19 @@ if (!empty($_POST)) {
 
     if (!isset($error)) {
         try {
-            $question->setOnderwerp(htmlspecialchars($_POST['onderwerp']));
-            $question->setVraag(htmlspecialchars($_POST['vraag']));
-            $question->setAntwoord1(htmlspecialchars($_POST['antwoord1']));
-            $question->setAntwoord2(htmlspecialchars($_POST['antwoord2']));
+            $course_id = $_GET['id'];
+            $vraag = $_POST['vraag'];
+            $correctantwoord = $_POST['correctantwoord'];
+            $foutantwoord1 = $_POST['foutantwoord1'];
+            $foutantwoord2 = $_POST['foutantwoord2'];
+
+            $question->setCourse_id($course_id);
+            $question->setVraag($vraag);
+            $question->setCorrectantwoord($correctantwoord);
+            $question->setFoutantwoord1($foutantwoord1);
+            $question->setFoutantwoord2($foutantwoord2);
             // methode
-            $question->saveQuestion();
+            $question->saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2);
             var_dump($question);
         } catch (\Throwable $th) {
             $error = $th->getMessage();
@@ -59,22 +66,19 @@ if (!empty($_POST)) {
         <?php endif; ?>
 
         <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="onderwerp" id="onderwerp" placeholder="Wat is het onderwerp?">
-        </div>
-        <div>
             <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="vraag" id="vraag" placeholder="Wat is de vraag?">
         </div>
         <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="antwoord1" id="antwoord1" placeholder="Antwoord 1">
+            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="correctantwoord" id="correctantwoord" placeholder="Correct antwoord">
         </div>
         <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="antwoord2" id="antwoord2" placeholder="Antwoord 2">
+            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="foutantwoord1" id="foutantwoord1" placeholder="Fout antwoord 1">
         </div>
         <div>
-            <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md form_field w-52 sm:w-64 bg_secondary_btn md:w-72 rounded-2xl" type="submit" value="Voeg antwoord toe">
+            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="foutantwoord2" id="foutantwoord2" placeholder="Fout antwoord 2">
         </div>
         <div>
-            <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Volgende stap">
+            <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Post quiz">
         </div>
     </form>
 </body>
