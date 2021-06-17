@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="build/tailwind.css">
     <title>PEERHOOD</title>
 </head>
@@ -144,7 +144,7 @@ if (isset($_GET['id'])) {
 
                     let newPosterImg = document.createElement('img');
                     newPosterImg.src = "<?php echo $post['avatar'] ?>";
-                    newPosterImg.style.cssText = "width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;";
+                    newPosterImg.styles.cssText = "width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;";
                     let newPosterName = document.createElement('h3');
                     newPosterName.innerHTML = "<?php echo $post['firstname'] . " " . $post['lastname'] ?>";
 
