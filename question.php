@@ -12,39 +12,51 @@ if ($role === "2") {
     $fetchQuestion->setCourse_id($course_id);
     $q = $fetchQuestion->fetchLatestQuizByTeam($course_id);
 
+    $question_id = $q['id'];
+    $checkAnswer = new Question();
+    $checkAnswer->setQuestionId($question_id);
+    $checkAnswer->setUserId($userID);
+    $c = $checkAnswer->checkIfAnswered($userID, $question_id);
+
     $fetchAnswers = new Question();
     $fetchAnswers->setCourse_id($course_id);
     $a = $fetchAnswers->fetchQuestions($course_id);
     shuffle($a);
-    //var_dump($a);
+  
+    if (isset($_POST['submitAnswer'])) {
+        $question_id = $q['id'];
+        $answer = $_POST['radio'];
+        $submitAnswer = new Question();
+        $submitAnswer->setQuestionId($question_id);
+        $submitAnswer->setUserId($userID);
+        $submitAnswer->setAnswer($answer);
+        $submit = $submitAnswer->submitAnswer($question_id, $userID, $answer);
+    }
 }
+
+
 
 $question = new Question();
 
-if (!empty($_POST)) {
+if (!empty($_POST['submitQuestion'])) {
+    $vraag = $_POST['vraag'];
 
-    if (!empty($_POST['vraag'])) {
+    try {
         $vraag = $_POST['vraag'];
-    }
+        $correctantwoord = $_POST['correctantwoord'];
+        $foutantwoord1 = $_POST['foutantwoord1'];
+        $foutantwoord2 = $_POST['foutantwoord2'];
+        $course_id = $_GET['id'];
 
-    if (!isset($error)) {
-        try {
-            $vraag = $_POST['vraag'];
-            $correctantwoord = $_POST['correctantwoord'];
-            $foutantwoord1 = $_POST['foutantwoord1'];
-            $foutantwoord2 = $_POST['foutantwoord2'];
-
-            $question->setCourse_id($course_id);
-            $question->setVraag($vraag);
-            $question->setCorrectantwoord($correctantwoord);
-            $question->setFoutantwoord1($foutantwoord1);
-            $question->setFoutantwoord2($foutantwoord2);
-            // methode
-            $question->saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2);
-            var_dump($question);
-        } catch (\Throwable $th) {
-            $error = $th->getMessage();
-        }
+        $question->setCourse_id($course_id);
+        $question->setVraag($vraag);
+        $question->setCorrectantwoord($correctantwoord);
+        $question->setFoutantwoord1($foutantwoord1);
+        $question->setFoutantwoord2($foutantwoord2);
+        // methode
+        $question->saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2);
+    } catch (\Throwable $th) {
+        $error = $th->getMessage();
     }
 }
 
@@ -56,7 +68,7 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="build/tailwind.css">
     <title>PEERHOOD | Quiz</title>
 </head>
@@ -91,12 +103,21 @@ if (!empty($_POST)) {
                 <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="foutantwoord2" id="foutantwoord2" placeholder="Fout antwoord 2">
             </div>
             <div>
-                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Post quiz">
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" name="submitQuestion" value="Post quiz">
             </div>
         </form>
 
     <?php else : ?>
-        <h2 class="mb-5 text-center"><?php echo $q['question'] ?></h2>
+        <?php if (isset($error)) : ?>
+            <div class="mb-5 text-center form_error">
+                <p class="form_error">
+                    <?php echo $error; ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($c == false) : ?>
+                    <h2 class="mb-5 text-center"><?php echo $q['question'] ?></h2>
 
         <form action="" method="POST">
             <div class="mb-10 space-y-2 text-center">
@@ -109,9 +130,8 @@ if (!empty($_POST)) {
             </div>
             <div>
                 <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Indienen">
-            </div>
-        </form>
-
+              </form>
+        <?php endif ?>
     <?php endif ?>
 </body>
 

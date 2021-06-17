@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="build/tailwind.css">
     <title>PEERHOOD</title>
 </head>
@@ -63,11 +63,15 @@ if (isset($_GET['id'])) {
     </div>
 
     <?php if ($role == 1) : ?>
-        <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $course['coursename'] ?></h1>
+        <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $course['coursename'] . " (" . $course['code'] . ")" ?></h1>
         <a class="block w-64 h-12 py-2 mb-2 mb-5 ml-auto mr-auto text-center shadow-md form_field hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="question.php?id=<?php echo $course['id'] ?>">Nieuwe quiz</a>
         <a class="block w-64 h-12 py-2 mb-2 mb-5 ml-auto mr-auto text-center shadow-md form_field hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="teams.php?id=<?php echo $course['id'] ?>">Bekijk teams</a>
     <?php else : ?>
         <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $team['teamname'] ?></h1>
+        <div class="mb-5 text-center form_error">
+            <p class="form_error">
+            </p>
+        </div>
         <form class="form" action="" method="post">
             <input id="postcontent" class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="post" placeholder="Schrijf een nieuwe post">
             <input type="hidden" name="userID" class="userID" value="<?php echo $userID ?>">
@@ -111,7 +115,7 @@ if (isset($_GET['id'])) {
         </div>
 
         <div class="quiz">
-            <a class="block w-64 h-12 pt-2 mb-10 ml-auto mr-auto text-center text-white shadow-md form_btn md:w-72 rounded-2xl" href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz!</a>
+            <a class="block w-64 h-12 pt-2 mb-10 ml-auto mr-auto text-center text-white shadow-md form_btn md:w-72 rounded-2xl" href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz beschikbaar!</a>
         </div>
     <?php endif ?>
 
@@ -136,31 +140,11 @@ if (isset($_GET['id'])) {
                 })
                 .then(response => response.json())
                 .then(result => {
-                    let newPost = document.createElement('div');
-                    newPost.classList.add("forumpost");
+                    let success = document.querySelector('.form_error');
+                    success.innerHTML = "Je post is geplaatst!";
 
-                    let newPoster = document.createElement('div');
-                    newPost.classList.add("poster");
-
-                    let newPosterImg = document.createElement('img');
-                    newPosterImg.src = "<?php echo $post['avatar'] ?>";
-                    newPosterImg.style.cssText = "width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;";
-                    let newPosterName = document.createElement('h3');
-                    newPosterName.innerHTML = "<?php echo $post['firstname'] . " " . $post['lastname'] ?>";
-
-                    newPoster.appendChild(newPosterImg);
-                    newPoster.appendChild(newPosterName);
-
-                    newPost.appendChild(newPoster);
-
-                    let newPostContent = document.createElement('article');
-                    newPostContent.innerHTML = result.body;
-
-                    newPost.appendChild(newPostContent);
-
-                    document.getElementById('postcontent').value = "";
-
-                    document.body.appendChild(newPost);
+                    let post = document.getElementById('postcontent');
+                    post.value  = '';
                 })
         })
     </script>
