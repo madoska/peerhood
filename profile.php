@@ -107,9 +107,14 @@ if (isset($_POST['WWOpslaan'])) {
                 <input type="submit" value="Opslaan" name="emailOpslaan" class="block h-12 mb-10 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl">
             </form>
             <form action="" method="post">
-                <input class="block mb-5 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="password" value="" name="password" placeholder="Wachtwoord"/>
+                <input class="block mb-5 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="password" value="" name="password" placeholder="Wachtwoord" />
                 <input type="submit" value="Opslaan" name="WWOpslaan" class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl">
             </form>
+
+            <div class="mt-5 text-center">
+                <a class="form_field" href="logout.php">Uitloggen</a>
+            </div>
+
         </div>
     </div>
 

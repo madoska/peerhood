@@ -73,41 +73,45 @@ if (isset($_GET['id'])) {
             <input type="hidden" name="userID" class="userID" value="<?php echo $userID ?>">
             <input type="hidden" name="teamID" class="teamID" value="<?php echo $teamID ?>">
             <br>
-            <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Post" name="submitPost" id="submitPost">
+            <input class="block w-64 h-12 mb-10 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Post" name="submitPost" id="submitPost">
         </form>
 
         <div class="forum">
             <?php foreach ($posts as $post) : ?>
-                <div class="forumpost">
-                    <div class="poster"> <img src="<?php echo $post['avatar'] ?>">
-                        <h3><?php echo $post['firstname'] . " " . $post['lastname'] ?></h3>
+                <div class="px-5 py-5 mx-5 my-5 ml-auto mr-auto w-72 green-bg-light rounded-3xl sm:w-80 md:w-96 forumpost">
+                    <div class="flex items-center poster">
+                        <img class="w-16 h-16 mr-5 rounded-full" src="<?php echo $post['avatar'] ?>">
+                        <h3 class="font-normal form_field"><?php echo $post['firstname'] . " " . $post['lastname'] ?></h3>
                     </div>
-                    <article><?php echo $post['content'] ?></article>
-                    <div class="forumactions">
-                        <div class="forumlikes">2 likes</div>
-                        <div class="forumreact">Reageren</div>
+                    <article class="mt-5 mb-5 form_field"><?php echo $post['content'] ?></article>
+                    <div class="flex pb-5 forumactions">
+                        <div class="mr-5 form_field forumlikes">2 likes</div>
+                        <div class="form_field forumreact">Reageren</div>
                     </div>
-                </div>
-                <div class="forumcomment">
-                    <?php
-                    $postID = $post['id'];
-                    $getComments = new Forum();
-                    $getComments->setPostID($postID);
-                    $comments = $getComments->getComments($postID);
-                    foreach ($comments as $comment) :
-                    ?>
-                        <div class="commenter" style="  width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                            <img src="<?php echo $comment['avatar'] ?>">
-                            <h3><?php echo $comment['firstname'] . " " . $comment['lastname'] ?></h3>
-                        </div>
-                        <article><?php echo $comment['content'] ?></article>
-                    <?php endforeach ?>
+
+                    <div class="forumcomment">
+                        <?php
+                        $postID = $post['id'];
+                        $getComments = new Forum();
+                        $getComments->setPostID($postID);
+                        $comments = $getComments->getComments($postID);
+                        foreach ($comments as $comment) :
+                        ?>
+                            <div class="flex items-center poster">
+                                <img class="w-16 h-16 mr-5 rounded-full" src="<?php echo $comment['avatar'] ?>">
+                                <div class="flex flex-col w-40 px-3 py-3 bg-white sm:w-80 md:w-96 rounded-2xl">
+                                    <h3 class="mb-2 font-normal form_field"><?php echo $comment['firstname'] . " " . $comment['lastname'] ?></h3>
+                                    <article class="form_field"><?php echo $comment['content'] ?></article>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
                 </div>
             <?php endforeach ?>
         </div>
 
         <div class="quiz">
-            <a href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz!</a>
+            <a class="block w-64 h-12 pt-2 mb-10 ml-auto mr-auto text-center text-white shadow-md form_btn md:w-72 rounded-2xl" href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz!</a>
         </div>
     <?php endif ?>
 
