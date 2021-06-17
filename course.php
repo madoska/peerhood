@@ -99,7 +99,7 @@ if (isset($_GET['id'])) {
                         ?>
                             <div class="flex items-center poster">
                                 <img class="w-16 h-16 mr-5 rounded-full" src="<?php echo $comment['avatar'] ?>">
-                                <div class="flex flex-col w-40 px-3 py-3 bg-white rounded-2xl">
+                                <div class="flex flex-col w-40 px-3 py-3 bg-white sm:w-80 md:w-96 rounded-2xl">
                                     <h3 class="mb-2 font-normal form_field"><?php echo $comment['firstname'] . " " . $comment['lastname'] ?></h3>
                                     <article class="form_field"><?php echo $comment['content'] ?></article>
                                 </div>
