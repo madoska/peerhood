@@ -9,11 +9,10 @@ if ($role != 1) {
     $fetchPData = new User();
     $fetchPData->setUserID($userID);
     $PData = $fetchPData->fetchPData($userID);
-    
 } else {
 }
 
-$id= $PData["id"];
+//$id = $PData["id"];
 
 
 if (isset($_POST['submit']) && $role == 1) {
@@ -47,15 +46,15 @@ if (isset($_POST['controleer'])) {
         $code2check = $cr['code'];
         $course_id = $cr['id'];
     }
-    
-   //compare
 
-   if($cc===$code2check){
-       $team = new Team();
+    //compare
+
+    if ($cc === $code2check) {
+        $team = new Team();
         $r = $team->fetchAvailableGroups($course_id);
         shuffle($r);
-        $newR=$r[0];
-        $newRString = implode(" ",$newR);
+        $newR = $r[0];
+        $newRString = implode(" ", $newR);
         $rnew = (int)$newRString;
 
         //Add student to groups
@@ -64,12 +63,11 @@ if (isset($_POST['controleer'])) {
         $newly->setStudentID($id);
         $n = $newly->addStudents($id, $rnew);
         //var_dump($id);
-        
+
         $error = "Je bent aangemeld voor dit vak!";
-   }
-   else{
-    var_dump('nope');
-   }
+    } else {
+        var_dump('nope');
+    }
 }
 
 ?>
@@ -86,13 +84,18 @@ if (isset($_POST['controleer'])) {
 </head>
 
 <body>
-    <div class="px-5 py-5 mb-10 ml-auto mr-auto gradient rounded-b-xl">
-      
     <?php if ($role == 1) { ?>
+        <div class="px-5 py-5 mb-10 ml-auto mr-auto gradient rounded-b-xl">
+            <h2 class="text-2xl text-center text-white form_title">Welk vak geef jij?</h2>
+        </div>
+        <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
 
-        <h2 class="text-2xl text-center text-white form_title">Welk vak geef jij?</h2>
-    </div>
-    <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
+    <?php } else { ?>
+        <div class="px-5 py-5 mb-10 ml-auto mr-auto gradient rounded-b-xl">
+            <h2 class="text-2xl text-center text-white form_title">Welk vak volg jij?</h2>
+        </div>
+
+        <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
 
     <?php } ?>
 
@@ -111,22 +114,21 @@ if (isset($_POST['controleer'])) {
             <br>
             <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Creeër cursus" name="submit">
         </form>
+
     <?php } else { ?>
 
-        <h2 class="text-2xl text-center text-white form_title">Welk vak volg jij?</h2>
-    
-    <h2 class="text-2xl text-center mb-14 form_title md:text-2xl">Nieuwe cursus</h2>
-    <form class="form" action="" method="post">
-        <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="CheckName" placeholder="Naam van het vak">
+        <form class="form" action="" method="post">
+            <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="CheckName" placeholder="Naam van het vak">
             <br>
-        <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="CheckCode" placeholder="Code">
+            <input class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="CheckCode" placeholder="Code">
             <br>
             <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Controleer" name="controleer">
-            </form>
+        </form>
     <?php } ?>
 
     <footer>
-    <?php include_once('nav.inc.php'); ?>
+        <?php include_once('nav.inc.php'); ?>
     </footer>
 </body>
+
 </html>
