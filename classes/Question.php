@@ -9,7 +9,10 @@ class Question {
     private $foutantwoord1;
     private $foutantwoord2;  
     private $course_id;
+    private $question_id;
     private $solution_id;
+    private $answer;
+    private $user_id;
 
     public function getOnderwerp() {
         return $this->onderwerp;
@@ -123,6 +126,17 @@ class Question {
         return $result;
     }
 
+    public function submitAnswer($question_id, $user_id, $answer){
+        $conn = Db::connect();
+        $statement = $conn->prepare("INSERT INTO answers (question_id, user_id, response) VALUES (:question_id, :userID, :response)");
+        $statement->bindParam(":question_id", $question_id);
+        $statement->bindParam(":userID", $user_id);
+        $statement->bindParam(":response", $answer);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     /**
      * Get the value of correctantwoord
      */
@@ -141,6 +155,60 @@ class Question {
         }
 
         $this->correctantwoord = $correctantwoord;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of answer
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * Set the value of answer
+     */
+    public function setAnswer($answer): self
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of question_id
+     */
+    public function getQuestionId()
+    {
+        return $this->question_id;
+    }
+
+    /**
+     * Set the value of question_id
+     */
+    public function setQuestionId($question_id): self
+    {
+        $this->question_id = $question_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of user_id
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set the value of user_id
+     */
+    public function setUserId($user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

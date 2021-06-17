@@ -12,16 +12,25 @@ if ($role === "2") {
     $fetchQuestion->setCourse_id($course_id);
     $q = $fetchQuestion->fetchLatestQuizByTeam($course_id);
 
+
     $fetchAnswers = new Question();
     $fetchAnswers->setCourse_id($course_id);
     $a = $fetchAnswers->fetchQuestions($course_id);
     shuffle($a);
-    var_dump($a);
+
+    if (isset($_POST['submitAnswer'])) {
+        $question_id = $q['id'];
+        $answer = $_POST['radio'];
+        $submitAnswer = new Question();
+        $submitAnswer->setQuestionId($question_id);
+        $submitAnswer->setUserId($userID);
+        $submitAnswer->setAnswer($answer);
+        $submit = $submitAnswer->submitAnswer($question_id, $userID, $answer);
+    
+    }
 }
 
-if (isset($_POST['submitAnswer'])) {
-    $answer = $_POST['radio'];
-}
+
 
 $question = new Question();
 
@@ -100,6 +109,14 @@ if (!empty($_POST['submitQuestion'])) {
         </form>
 
     <?php else : ?>
+        <?php if (isset($error)) : ?>
+            <div class="mb-5 text-center form_error">
+                <p class="form_error">
+                    <?php echo $error; ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
         <h2><?php echo $q['question'] ?></h2>
 
         <form action="" method="POST">
@@ -110,10 +127,9 @@ if (!empty($_POST['submitQuestion'])) {
             <input type="radio" id="answer3" name="radio" value="<?php echo $randomA = $a[2];  ?>">
             <label for="answer3"><?php echo $randomA = $a[2]; ?></label><br>
             <div>
-                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" name="submitAnswer" type="submit" value="Indienen">
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl submitAnswer" name="submitAnswer" type="submit" value="Indienen">
             </div>
         </form>
-
     <?php endif ?>
 </body>
 
