@@ -111,7 +111,7 @@ if (isset($_GET['id'])) {
         </div>
 
         <div class="quiz">
-            <a class="block w-64 h-12 pt-2 mb-10 ml-auto mr-auto text-center text-white shadow-md form_btn md:w-72 rounded-2xl" href="">Nieuwe quiz!</a>
+            <a class="block w-64 h-12 pt-2 mb-10 ml-auto mr-auto text-center text-white shadow-md form_btn md:w-72 rounded-2xl" href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz!</a>
         </div>
     <?php endif ?>
 
