@@ -64,15 +64,10 @@ if (isset($_GET['id'])) {
 
     <?php if ($role == 1) : ?>
         <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $course['coursename'] ?></h1>
-        <a class="block w-64 h-12 py-2 mb-2 mb-5 ml-auto mr-auto text-center shadow-md form_field hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="question.php">Bekijk quizzen</a>
-        <a class="block w-64 h-12 py-2 mb-2 ml-auto mr-auto text-center shadow-md form_field hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="teams.php?id=<?php echo $course['id'] ?>">Bekijk teams</a>
+        <a class="block w-64 h-12 py-2 mb-2 mb-5 ml-auto mr-auto text-center shadow-md form_field hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="question.php?id=<?php echo $course['id'] ?>">Nieuwe quiz</a>
+        <a class="block w-64 h-12 py-2 mb-2 mb-5 ml-auto mr-auto text-center shadow-md form_field hover:opacity-90 dark_text bg-secondary-button md:w-72 rounded-2xl" href="teams.php?id=<?php echo $course['id'] ?>">Bekijk teams</a>
     <?php else : ?>
         <h1 class="text-2xl text-center mb-14 form_title md:text-2xl"><?php echo $team['teamname'] ?></h1>
-        <div class="mb-5 text-center form_error">
-            <p class="form_error">
-                Je post is geplaatst!
-            </p>
-        </div>
         <form class="form" action="" method="post">
             <input id="postcontent" class="block w-64 mb-2 ml-auto mr-auto bg-transparent border-b border-black form_field md:w-72" type="text" name="post" placeholder="Schrijf een nieuwe post">
             <input type="hidden" name="userID" class="userID" value="<?php echo $userID ?>">
@@ -81,19 +76,39 @@ if (isset($_GET['id'])) {
             <input class="block w-64 h-12 mb-2 ml-auto mr-auto text-white shadow-md form_btn md:w-72 rounded-2xl" type="submit" value="Post" name="submitPost" id="submitPost">
         </form>
 
+        <div class="forum">
+            <?php foreach ($posts as $post) : ?>
+                <div class="forumpost">
+                    <div class="poster"> <img src="<?php echo $post['avatar'] ?>">
+                        <h3><?php echo $post['firstname'] . " " . $post['lastname'] ?></h3>
+                    </div>
+                    <article><?php echo $post['content'] ?></article>
+                    <div class="forumactions">
+                        <div class="forumlikes">2 likes</div>
+                        <div class="forumreact">Reageren</div>
+                    </div>
+                </div>
+                <div class="forumcomment">
+                    <?php
+                    $postID = $post['id'];
+                    $getComments = new Forum();
+                    $getComments->setPostID($postID);
+                    $comments = $getComments->getComments($postID);
+                    foreach ($comments as $comment) :
+                    ?>
+                        <div class="commenter" style="  width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                            <img src="<?php echo $comment['avatar'] ?>">
+                            <h3><?php echo $comment['firstname'] . " " . $comment['lastname'] ?></h3>
+                        </div>
+                        <article><?php echo $comment['content'] ?></article>
+                    <?php endforeach ?>
+                </div>
+            <?php endforeach ?>
+        </div>
 
-        <?php foreach ($posts as $post) : ?>
-            <div class="forumpost">
-                <div class="poster"> <img src="<?php echo $post['avatar'] ?>">
-                    <h3><?php echo $post['firstname'] . " " . $post['lastname'] ?></h3>
-                </div>
-                <article><?php echo $post['content'] ?></article>
-                <div class="forumactions">
-                    <div class="forumlikes">2 likes</div>
-                    <div class="forumreact">Reageren</div>
-                </div>
-            </div>
-        <?php endforeach ?>
+        <div class="quiz">
+            <a href="question.php?courseid=<?php echo $courseID ?>">Nieuwe quiz!</a>
+        </div>
     <?php endif ?>
 
     <script>
@@ -139,9 +154,7 @@ if (isset($_GET['id'])) {
 
                     newPost.appendChild(newPostContent);
 
-                    let firstPost = document.querySelector('.forumpost');
-
-                    document.body.insertBefore(newPost, firstPost);
+                    document.getElementById('postcontent').value = "";
 
                     document.body.appendChild(newPost);
                 })

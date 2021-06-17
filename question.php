@@ -6,6 +6,19 @@ $fetchPData = new User();
 $fetchPData->setUserID($userID);
 $PData = $fetchPData->fetchPData($userID);
 
+if ($role === "2") {
+    $course_id = $_GET['courseid'];
+    $fetchQuestion = new Question();
+    $fetchQuestion->setCourse_id($course_id);
+    $q = $fetchQuestion->fetchLatestQuizByTeam($course_id);
+
+    $fetchAnswers = new Question();
+    $fetchAnswers->setCourse_id($course_id);
+    $a = $fetchAnswers->fetchQuestions($course_id);
+    shuffle($a);
+    var_dump($a);
+}
+
 $question = new Question();
 
 if (!empty($_POST)) {
@@ -16,12 +29,18 @@ if (!empty($_POST)) {
 
     if (!isset($error)) {
         try {
-            $question->setOnderwerp(htmlspecialchars($_POST['onderwerp']));
-            $question->setVraag(htmlspecialchars($_POST['vraag']));
-            $question->setAntwoord1(htmlspecialchars($_POST['antwoord1']));
-            $question->setAntwoord2(htmlspecialchars($_POST['antwoord2']));
+            $vraag = $_POST['vraag'];
+            $correctantwoord = $_POST['correctantwoord'];
+            $foutantwoord1 = $_POST['foutantwoord1'];
+            $foutantwoord2 = $_POST['foutantwoord2'];
+
+            $question->setCourse_id($course_id);
+            $question->setVraag($vraag);
+            $question->setCorrectantwoord($correctantwoord);
+            $question->setFoutantwoord1($foutantwoord1);
+            $question->setFoutantwoord2($foutantwoord2);
             // methode
-            $question->saveQuestion();
+            $question->saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2);
             var_dump($question);
         } catch (\Throwable $th) {
             $error = $th->getMessage();
@@ -39,7 +58,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="build/tailwind.css">
-    <title>Meerkeuzevraag | peerhood</title>
+    <title>PEERHOOD | Quiz</title>
 </head>
 
 <body>
@@ -47,36 +66,51 @@ if (!empty($_POST)) {
         <h1 class="text-3xl text-center text-white form_title">Dag <?php echo $PData['firstname'] ?></h1>
     </div>
 
-    <h2 class="mb-5 text-2xl text-center form_title md:text-2xl">Meerkeuzevraag maken</h2>
-    <form action="" method="POST">
+    <?php if ($role === "1") : ?>
+        <h2 class="mb-5 text-2xl text-center form_title md:text-2xl">Meerkeuzevraag maken</h2>
+        <form action="" method="POST">
 
-        <?php if (isset($error)) : ?>
-            <div class="mb-5 text-center form_error">
-                <p>
-                    <?php echo $error; ?>
-                </p>
+            <?php if (isset($error)) : ?>
+                <div class="mb-5 text-center form_error">
+                    <p>
+                        <?php echo $error; ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <div>
+                <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="vraag" id="vraag" placeholder="Wat is de vraag?">
             </div>
-        <?php endif; ?>
+            <div>
+                <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="correctantwoord" id="correctantwoord" placeholder="Correct antwoord">
+            </div>
+            <div>
+                <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="foutantwoord1" id="foutantwoord1" placeholder="Fout antwoord 1">
+            </div>
+            <div>
+                <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="foutantwoord2" id="foutantwoord2" placeholder="Fout antwoord 2">
+            </div>
+            <div>
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Post quiz">
+            </div>
+        </form>
 
-        <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="onderwerp" id="onderwerp" placeholder="Wat is het onderwerp?">
-        </div>
-        <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="vraag" id="vraag" placeholder="Wat is de vraag?">
-        </div>
-        <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="antwoord1" id="antwoord1" placeholder="Antwoord 1">
-        </div>
-        <div>
-            <input class="block mb-8 ml-auto mr-auto bg-transparent border-b border-black w-52 form_field sm:w-64 md:w-72" type="text" name="antwoord2" id="antwoord2" placeholder="Antwoord 2">
-        </div>
-        <div>
-            <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md form_field w-52 sm:w-64 bg_secondary_btn md:w-72 rounded-2xl" type="submit" value="Voeg antwoord toe">
-        </div>
-        <div>
-            <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Volgende stap">
-        </div>
-    </form>
+    <?php else : ?>
+        <h2><?php echo $q['question'] ?></h2>
+
+        <form action="" method="POST">
+            <input type="radio" id="answer1" name="answer1" value="<?php echo $randomA = $a[0];  ?>">
+            <label for="answer1"><?php echo $randomA = $a[0]; ?></label><br>
+            <input type="radio" id="answer2" name="answer2" value="<?php echo $randomA = $a[1];  ?>">
+            <label for="answer2"><?php echo $randomA = $a[1]; ?></label><br>
+            <input type="radio" id="answer3" name="answer3" value="<?php echo $randomA = $a[2];  ?>">
+            <label for="answer3"><?php echo $randomA = $a[2]; ?></label><br>
+            <div>
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Indienen">
+            </div>
+        </form>
+
+    <?php endif ?>
 </body>
 
 <footer>

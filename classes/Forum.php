@@ -8,6 +8,7 @@ class Forum
     private $studentID;
     private $postContent;
     private $commentContent;
+    private $postID;
 
     public function postForum($studentID, $teamID, $postContent){
         $conn = Db::connect();
@@ -22,12 +23,21 @@ class Forum
 
     public function getForumPosts($teamID){
         $conn = Db::connect();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON users.id = posts.user_id WHERE team_id = :teamID ORDER BY posts.id DESC");
+        $statement = $conn->prepare("SELECT posts.id, posts.content, users.firstname, users.lastname, users.avatar FROM posts INNER JOIN users ON users.id = posts.user_id WHERE team_id = 1 ORDER BY posts.id DESC");
         $statement->bindParam(":teamID", $teamID);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getComments($postID){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT * FROM comments AS comment INNER JOIN users AS user ON user.id = comment.user_id WHERE comment.post_id = :postID");
+        $statement->bindParam(":postID", $postID);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    } 
 
     public function getTeamID()
     {
@@ -85,6 +95,24 @@ class Forum
     public function setCommentContent($commentContent): self
     {
         $this->commentContent = $commentContent;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of postID
+     */
+    public function getPostID()
+    {
+        return $this->postID;
+    }
+
+    /**
+     * Set the value of postID
+     */
+    public function setPostID($postID): self
+    {
+        $this->postID = $postID;
 
         return $this;
     }
