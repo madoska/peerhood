@@ -18,7 +18,6 @@ if ($role = 1) {
 $getUserCourses = new Team();
 $getUserCourses->setStudentID($userID);
 $userCourses = $getUserCourses->fetchCourseForUser($userID);
-
 ?>
 
 <!DOCTYPE html>
@@ -56,9 +55,9 @@ $userCourses = $getUserCourses->fetchCourseForUser($userID);
         <br>
     <?php endforeach; ?>
 
-    <?php foreach ($userCourses as $course) : ?>
-        <a class="block w-64 h-12 py-2 mb-2 ml-auto mr-auto text-center text-white shadow-md form_field hover:opacity-90 md:w-72 rounded-2xl" href="course.php?teamid=<?php echo $course['course_id'] ?>" style='background-color:<?php printf("#%06X\n", mt_rand(0, 0x222222)); ?>'>
-            <?php echo $course['coursename']; ?>
+    <?php foreach ($userCourses as $userCourse) : ?>
+        <a class="block w-64 h-12 py-2 mb-2 ml-auto mr-auto text-center text-white shadow-md form_field hover:opacity-90 md:w-72 rounded-2xl" href="course.php?teamid=<?php echo $userCourse['course_id'] ?>" style='background-color:<?php printf("#%06X\n", mt_rand(0, 0x222222)); ?>'>
+            <?php echo $userCourse['coursename']; ?>
         </a>
         <br>
     <?php endforeach; ?>

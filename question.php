@@ -17,7 +17,6 @@ if ($role === "2") {
     $checkAnswer->setQuestionId($question_id);
     $checkAnswer->setUserId($userID);
     $c = $checkAnswer->checkIfAnswered($userID, $question_id);
-    var_dump($c);
 
     $fetchAnswers = new Question();
     $fetchAnswers->setCourse_id($course_id);
@@ -32,7 +31,6 @@ if ($role === "2") {
         $submitAnswer->setUserId($userID);
         $submitAnswer->setAnswer($answer);
         $submit = $submitAnswer->submitAnswer($question_id, $userID, $answer);
-    
     }
 }
 
@@ -41,29 +39,24 @@ if ($role === "2") {
 $question = new Question();
 
 if (!empty($_POST['submitQuestion'])) {
+    $vraag = $_POST['vraag'];
 
-    if (!empty($_POST['vraag'])) {
+    try {
         $vraag = $_POST['vraag'];
-    }
+        $correctantwoord = $_POST['correctantwoord'];
+        $foutantwoord1 = $_POST['foutantwoord1'];
+        $foutantwoord2 = $_POST['foutantwoord2'];
+        $course_id = $_GET['id'];
 
-    if (!isset($error)) {
-        try {
-            $vraag = $_POST['vraag'];
-            $correctantwoord = $_POST['correctantwoord'];
-            $foutantwoord1 = $_POST['foutantwoord1'];
-            $foutantwoord2 = $_POST['foutantwoord2'];
-
-            $question->setCourse_id($course_id);
-            $question->setVraag($vraag);
-            $question->setCorrectantwoord($correctantwoord);
-            $question->setFoutantwoord1($foutantwoord1);
-            $question->setFoutantwoord2($foutantwoord2);
-            // methode
-            $question->saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2);
-            var_dump($question);
-        } catch (\Throwable $th) {
-            $error = $th->getMessage();
-        }
+        $question->setCourse_id($course_id);
+        $question->setVraag($vraag);
+        $question->setCorrectantwoord($correctantwoord);
+        $question->setFoutantwoord1($foutantwoord1);
+        $question->setFoutantwoord2($foutantwoord2);
+        // methode
+        $question->saveQuestion($course_id, $vraag, $correctantwoord, $foutantwoord1, $foutantwoord2);
+    } catch (\Throwable $th) {
+        $error = $th->getMessage();
     }
 }
 
@@ -123,20 +116,20 @@ if (!empty($_POST['submitQuestion'])) {
             </div>
         <?php endif; ?>
 
-        <?php if($c == false): ?>
-        <h2><?php echo $q['question'] ?></h2>
+        <?php if ($c == false) : ?>
+            <h2><?php echo $q['question'] ?></h2>
 
-        <form action="" method="POST">
-            <input type="radio" id="answer1" name="radio" value="<?php echo $randomA = $a[0];  ?>">
-            <label for="answer1"><?php echo $randomA = $a[0]; ?></label><br>
-            <input type="radio" id="answer2" name="radio" value="<?php echo $randomA = $a[1];  ?>">
-            <label for="answer2"><?php echo $randomA = $a[1]; ?></label><br>
-            <input type="radio" id="answer3" name="radio" value="<?php echo $randomA = $a[2];  ?>">
-            <label for="answer3"><?php echo $randomA = $a[2]; ?></label><br>
-            <div>
-                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl submitAnswer" name="submitAnswer" type="submit" value="Indienen">
-            </div>
-        </form>
+            <form action="" method="POST">
+                <input type="radio" id="answer1" name="radio" value="<?php echo $randomA = $a[0];  ?>">
+                <label for="answer1"><?php echo $randomA = $a[0]; ?></label><br>
+                <input type="radio" id="answer2" name="radio" value="<?php echo $randomA = $a[1];  ?>">
+                <label for="answer2"><?php echo $randomA = $a[1]; ?></label><br>
+                <input type="radio" id="answer3" name="radio" value="<?php echo $randomA = $a[2];  ?>">
+                <label for="answer3"><?php echo $randomA = $a[2]; ?></label><br>
+                <div>
+                    <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl submitAnswer" name="submitAnswer" type="submit" value="Indienen">
+                </div>
+            </form>
         <?php endif ?>
     <?php endif ?>
 </body>

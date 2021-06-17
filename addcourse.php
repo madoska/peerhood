@@ -60,13 +60,12 @@ if (isset($_POST['controleer'])) {
         //Add student to groups
         $newly = new Team();
         $newly->setTeamID($newR);
-        $newly->setStudentID($id);
-        $n = $newly->addStudents($id, $rnew);
+        $newly->setStudentID($userID);
+        $n = $newly->addStudents($userID, $rnew);
         //var_dump($id);
 
         $error = "Je bent aangemeld voor dit vak!";
     } else {
-        var_dump('nope');
     }
 }
 

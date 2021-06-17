@@ -1,9 +1,9 @@
 <?php
 const SETTINGS = [
     "db" => [
-        "user"      => "medinry369_peerhood",
-        "password"  => "Medina-204",
+        "user"      => "root",
+        "password"  => "",
         "host"      => "localhost",
-        "dbname"        => "medinry369_peerhood"
+        "dbname"        => "peerhood"
     ]
 ];
