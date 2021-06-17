@@ -35,3 +35,7 @@
     flex-direction: row;
     align-items: center;
 }
+
+p.success_msg {
+    display: none;
+}
