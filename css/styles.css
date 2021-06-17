@@ -8,7 +8,7 @@
 
 .forumpost {
   font-family: Oswald;
-  background: #F0FBE1;
+  background: #f0fbe1;
   margin-bottom: 10px;
   border-radius: 15px;
   padding: 2%;
@@ -31,11 +31,112 @@
 }
 
 .poster {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.commenter > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.commenter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.commenter > h3 {
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 p.success_msg {
-    display: none;
+  display: none;
+}
+
+.form_title,
+.form_btn,
+.form_field,
+.form_register,
+.form_error {
+  font-family: "Oswald", sans-serif;
+}
+
+.form_field {
+  outline: none;
+}
+
+.logo {
+  width: 200px;
+}
+
+.form_title {
+  color: #083643;
+  font-weight: 400;
+}
+
+.form_register {
+  color: #083643;
+}
+
+.dark_text {
+  color: #083643;
+}
+
+.form_field,
+.form_btn,
+.form_register {
+  font-weight: 300;
+}
+
+.form_btn {
+  background-color: #ff7f50;
+}
+
+.secondary_btn {
+  background-color: #b8ecd7;
+}
+
+.form_btn:hover {
+  opacity: 0.9;
+}
+
+.form_register:hover {
+  color: #ff7f50;
+}
+
+.form_field::placeholder {
+  color: #083643;
+}
+
+.form_error {
+  color: #ff7f50;
+}
+
+.bg-plus {
+  background-color: #ff7f50;
+}
+
+.bg-secondary-button {
+  background-color: #b8ecd7;
+}
+
+.gradient {
+  background: linear-gradient(
+    137deg,
+    rgba(208, 230, 165, 1) 0%,
+    rgba(134, 227, 206, 1) 100%
+  );
+}
+
+/* mediaqueries */
+
+@media screen and (min-width: 768px) {
+  .logo {
+    width: 300px;
+  }
 }

@@ -89,13 +89,19 @@ if (isset($_GET['id'])) {
                     </div>
                 </div>
                 <div class="forumcomment">
-                    <?php 
-                        $postID = $post['id'];
-                        $getComments = new Forum();
-                        $getComments->setPostID($postID);
-                        $comment = $getComments->getComments($postID);
-                        var_dump($comment);
-                     ?>
+                    <?php
+                    $postID = $post['id'];
+                    $getComments = new Forum();
+                    $getComments->setPostID($postID);
+                    $comments = $getComments->getComments($postID);
+                    foreach ($comments as $comment) :
+                    ?>
+                        <div class="commenter" style="  width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                            <img src="<?php echo $comment['avatar'] ?>">
+                            <h3><?php echo $comment['firstname'] . " " . $comment['lastname'] ?></h3>
+                        </div>
+                        <article><?php echo $comment['content'] ?></article>
+                    <?php endforeach ?>
                 </div>
             <?php endforeach ?>
         </div>
