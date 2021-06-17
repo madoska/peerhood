@@ -137,6 +137,20 @@ class Question {
         return $result;
     }
 
+    public function checkIfAnswered($user_id, $question_id){
+        $conn = Db::connect();
+        $statement = $conn->prepare("SELECT id FROM answers WHERE user_id = :userID AND question_id = :questionID");
+        $statement->bindParam(":userID", $user_id);
+        $statement->bindParam(":questionID", $question_id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Get the value of correctantwoord
      */

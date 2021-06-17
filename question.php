@@ -12,6 +12,12 @@ if ($role === "2") {
     $fetchQuestion->setCourse_id($course_id);
     $q = $fetchQuestion->fetchLatestQuizByTeam($course_id);
 
+    $question_id = $q['id'];
+    $checkAnswer = new Question();
+    $checkAnswer->setQuestionId($question_id);
+    $checkAnswer->setUserId($userID);
+    $c = $checkAnswer->checkIfAnswered($userID, $question_id);
+    var_dump($c);
 
     $fetchAnswers = new Question();
     $fetchAnswers->setCourse_id($course_id);
@@ -117,6 +123,7 @@ if (!empty($_POST['submitQuestion'])) {
             </div>
         <?php endif; ?>
 
+        <?php if($c == false): ?>
         <h2><?php echo $q['question'] ?></h2>
 
         <form action="" method="POST">
@@ -130,6 +137,7 @@ if (!empty($_POST['submitQuestion'])) {
                 <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl submitAnswer" name="submitAnswer" type="submit" value="Indienen">
             </div>
         </form>
+        <?php endif ?>
     <?php endif ?>
 </body>
 
