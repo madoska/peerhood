@@ -22,7 +22,7 @@ if ($role === "2") {
     $fetchAnswers->setCourse_id($course_id);
     $a = $fetchAnswers->fetchQuestions($course_id);
     shuffle($a);
-
+  
     if (isset($_POST['submitAnswer'])) {
         $question_id = $q['id'];
         $answer = $_POST['radio'];
@@ -117,19 +117,20 @@ if (!empty($_POST['submitQuestion'])) {
         <?php endif; ?>
 
         <?php if ($c == false) : ?>
-            <h2><?php echo $q['question'] ?></h2>
+                    <h2 class="mb-5 text-center"><?php echo $q['question'] ?></h2>
 
-            <form action="" method="POST">
-                <input type="radio" id="answer1" name="radio" value="<?php echo $randomA = $a[0];  ?>">
+        <form action="" method="POST">
+            <div class="mb-10 space-y-2 text-center">
+                <input type="radio" id="answer1" name="answer1" value="<?php echo $randomA = $a[0];  ?>">
                 <label for="answer1"><?php echo $randomA = $a[0]; ?></label><br>
-                <input type="radio" id="answer2" name="radio" value="<?php echo $randomA = $a[1];  ?>">
+                <input type="radio" id="answer2" name="answer2" value="<?php echo $randomA = $a[1];  ?>">
                 <label for="answer2"><?php echo $randomA = $a[1]; ?></label><br>
-                <input type="radio" id="answer3" name="radio" value="<?php echo $randomA = $a[2];  ?>">
+                <input type="radio" id="answer3" name="answer3" value="<?php echo $randomA = $a[2];  ?>">
                 <label for="answer3"><?php echo $randomA = $a[2]; ?></label><br>
-                <div>
-                    <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl submitAnswer" name="submitAnswer" type="submit" value="Indienen">
-                </div>
-            </form>
+            </div>
+            <div>
+                <input class="block h-12 mb-2 ml-auto mr-auto text-white shadow-md w-52 sm:w-64 form_btn md:w-72 rounded-2xl" type="submit" value="Indienen">
+              </form>
         <?php endif ?>
     <?php endif ?>
 </body>
